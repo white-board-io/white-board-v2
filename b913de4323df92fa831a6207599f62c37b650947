@@ -1,0 +1,27 @@
+packages/eslint-config/package.json
+  eaf583d83f45d16c 21
+package.json
+  eaf583d83f45d16c 9-10
+.github/workflows/ci.yml
+  eaf583d83f45d16c 1-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "b913de4323df92fa831a6207599f62c37b650947",
+  "prompts": {
+    "eaf583d83f45d16c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0c819410-2318-4b0c-8966-7b4a73cf0d3f",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 113,
+      "total_deletions": 12,
+      "accepted_lines": 105,
+      "overriden_lines": 0
+    }
+  }
+}
