@@ -1,0 +1,21 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.next
+.turbo
+dist
+build
+out
+coverage
+
+# Generated / lockfiles
+bun.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Editor / OS
+.idea
+.DS_Store
+.claude
