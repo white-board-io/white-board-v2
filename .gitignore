@@ -36,3 +36,11 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# JetBrains IDEs (IntelliJ, WebStorm, PyCharm, etc.)
+.idea/
+.idea_modules/
+*.iml
+*.iws
+*.ipr
+atlassian-ide-plugin.xml
