@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch src/server.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "bun build src/server.ts --outdir dist --target bun",
     "start": "bun dist/server.js",
     "lint": "eslint .",
     "check-types": "tsc --noEmit"
