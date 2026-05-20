@@ -11,6 +11,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.61.3",
     "@repo/ui": "*",
     "@tanstack/react-router": "^1.120.0",
     "react": "^19.2.0",

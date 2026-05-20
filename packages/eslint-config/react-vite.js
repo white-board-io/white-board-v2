@@ -48,6 +48,7 @@ export const reactViteConfig = [
       "react/react-in-jsx-scope": "off",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "turbo/no-undeclared-env-vars": "warn",
+      "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     },
   },
   {

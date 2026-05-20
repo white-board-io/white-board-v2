@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-interface AppState {
+type AppState = {
   count: number;
   increment: () => void;
-}
+};
 
 export const useAppStore = create<AppState>()(
   devtools(
