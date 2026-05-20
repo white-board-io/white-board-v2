@@ -1,0 +1,49 @@
+packages/eslint-config/package.json
+  923c98a578c990e3 9-10,17,21
+apps/web/tsconfig.json
+  923c98a578c990e3 2,4,6
+apps/web/src/routes/__root.tsx
+  923c98a578c990e3 1-11
+apps/web/vite.config.ts
+  923c98a578c990e3 1-6,8
+apps/web/src/vite-env.d.ts
+  923c98a578c990e3 1
+apps/web/index.html
+  923c98a578c990e3 1-13
+packages/typescript-config/vite.json
+  923c98a578c990e3 1-10
+packages/eslint-config/react-vite.js
+  923c98a578c990e3 1-48,50-56
+apps/web/package.json
+  923c98a578c990e3 7-9,11,15,17-18,23-26,30,32-33
+apps/web/src/index.css
+  923c98a578c990e3 1
+apps/web/src/main.tsx
+  923c98a578c990e3 1-22
+apps/web/eslint.config.js
+  923c98a578c990e3 1,4
+apps/web/src/routes/index.tsx
+  923c98a578c990e3 1-13
+apps/web/src/store/index.ts
+  923c98a578c990e3 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "cbe40fc222b6ee644bbc8a9fee166f6c8be8c726",
+  "prompts": {
+    "923c98a578c990e3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "941cddd9-4ac4-4e2e-ba7c-c3e743863e97",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 215,
+      "total_deletions": 6,
+      "accepted_lines": 203,
+      "overriden_lines": 2
+    }
+  }
+}
