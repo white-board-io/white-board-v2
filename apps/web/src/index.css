@@ -1,1 +1,6 @@
-@import "tailwindcss";
+/**
+ * apps/web global stylesheet — imports the @repo/ui design tokens.
+ * Add app-specific styles below the import.
+ */
+
+@import "@repo/ui/styles.css";

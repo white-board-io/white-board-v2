@@ -1,0 +1,329 @@
+/**
+ * Whiteboard Design System — Tailwind v4 tokens + base layer
+ * ---------------------------------------------------------------------------
+ * The single source of truth for design tokens. Import this from any app:
+ *
+ *   // apps/web/src/index.css
+ *   @import "@repo/ui/styles.css";
+ *
+ * Tailwind v4 reads custom properties declared inside `@theme` and generates
+ * utilities (e.g. `--color-brand-500` → `bg-brand-500 text-brand-500 …`).
+ *
+ * Anchored on:
+ *   - Primary brand color: #595FAE (Whiteboard violet)
+ *   - Primary font:        Quicksand (Google Fonts, weights 300–700)
+ *   - Canvas:              warm paper (#FAFAF7)
+ *   - Default radius:      12px (matches Quicksand's rounded geometry)
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap");
+@import "tailwindcss";
+
+/* Make Tailwind's `dark:` modifier activate when we put `.dark` on <html>.
+   This is required so existing `dark:bg-zinc-*` utilities in the codebase
+   keep flipping with our ThemeProvider. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* =====================================================================
+     COLOR · Palette (direct utilities: bg-paper, text-ink, bg-brand-500…)
+     ===================================================================== */
+
+  /* Paper · canvas surfaces */
+  --color-paper: #fafaf7;
+  --color-paper-elevated: #ffffff;
+  --color-paper-sunken: #f2f1ea;
+  --color-paper-texture: #f6f4ec;
+
+  /* Ink · foreground (tinted toward the brand violet) */
+  --color-ink: #1a1d2e;
+  --color-ink-2: #2e3148;
+  --color-ink-3: #4e5170;
+  --color-ink-4: #717490;
+  --color-ink-5: #9b9eb3;
+  --color-ink-6: #c7c9d5;
+
+  /* Lines & dividers */
+  --color-line: #e6e4de;
+  --color-line-strong: #d2d0c8;
+  --color-line-subtle: #efede6;
+
+  /* Brand · violet — anchored on #595FAE */
+  --color-brand-50: #f0f1f8;
+  --color-brand-100: #dbddf0;
+  --color-brand-200: #b5b9e0;
+  --color-brand-300: #8e94cf;
+  --color-brand-400: #7177be;
+  --color-brand-500: #595fae;
+  --color-brand-600: #4a4f92;
+  --color-brand-700: #3b4076;
+  --color-brand-800: #2c3059;
+  --color-brand-900: #1d203d;
+
+  /* Marker · yellow secondary (highlight motif only) */
+  --color-marker-100: #fff3c4;
+  --color-marker-300: #fadb5f;
+  --color-marker-500: #ffd43b;
+  --color-marker-700: #b98a0f;
+
+  /* Semantic */
+  --color-success-50: #ecf7f0;
+  --color-success-100: #d2ebdb;
+  --color-success-500: #2f9e61;
+  --color-success-700: #1f6e43;
+  --color-success-900: #0e3d24;
+
+  --color-warning-50: #fbf3e0;
+  --color-warning-100: #f6e2ae;
+  --color-warning-500: #c7900a;
+  --color-warning-700: #8a6207;
+  --color-warning-900: #4e3702;
+
+  --color-danger-50: #fbeeec;
+  --color-danger-100: #f6cfc8;
+  --color-danger-500: #d24a36;
+  --color-danger-700: #9a2c1c;
+  --color-danger-900: #5c150c;
+
+  --color-info-50: #eaf4fb;
+  --color-info-100: #c8e2f4;
+  --color-info-500: #2a7dbf;
+  --color-info-700: #195484;
+  --color-info-900: #0b2e4a;
+
+  /* =====================================================================
+     COLOR · shadcn semantic aliases (used by the primitives in @repo/ui)
+     Components use `bg-primary`, `text-foreground`, etc.
+     ===================================================================== */
+
+  --color-background: #fafaf7;
+  --color-foreground: #1a1d2e;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1d2e;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1a1d2e;
+
+  --color-primary: #595fae;
+  --color-primary-foreground: #fafaf7;
+
+  --color-secondary: #f2f1ea;
+  --color-secondary-foreground: #1a1d2e;
+
+  --color-muted: #f2f1ea;
+  --color-muted-foreground: #717490;
+
+  /* "Accent" is the tonal brand wash — light violet bg, dark violet text */
+  --color-accent: #f0f1f8;
+  --color-accent-foreground: #3b4076;
+
+  --color-destructive: #d24a36;
+  --color-destructive-foreground: #fafaf7;
+
+  --color-border: #e6e4de;
+  --color-input: #e6e4de;
+  --color-ring: #595fae;
+
+  /* =====================================================================
+     TYPE
+     ===================================================================== */
+
+  --font-sans: "Quicksand", "Nunito", "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Quicksand", "Nunito", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-doodle: "Caveat", "Comic Sans MS", cursive;
+
+  /* Slightly larger body default than Tailwind's — Quicksand reads small */
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 17px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 30px;
+  --text-3xl: 38px;
+  --text-4xl: 48px;
+  --text-5xl: 60px;
+
+  /* =====================================================================
+     RADIUS · Slightly more rounded to match Quicksand's geometry
+     ===================================================================== */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* =====================================================================
+     SHADOWS · Warm-tinted toward violet, not blue
+     ===================================================================== */
+
+  --shadow-xs: 0 1px 2px rgba(28, 26, 50, 0.04);
+  --shadow-sm: 0 1px 2px rgba(28, 26, 50, 0.05), 0 1px 3px rgba(28, 26, 50, 0.05);
+  --shadow-md: 0 4px 10px rgba(28, 26, 50, 0.06), 0 2px 4px rgba(28, 26, 50, 0.06);
+  --shadow-lg: 0 12px 28px rgba(28, 26, 50, 0.08), 0 4px 10px rgba(28, 26, 50, 0.05);
+  --shadow-xl: 0 24px 56px rgba(28, 26, 50, 0.12), 0 8px 18px rgba(28, 26, 50, 0.06);
+  --shadow-brand: 0 4px 14px rgba(89, 95, 174, 0.3);
+
+  /* =====================================================================
+     MOTION
+     ===================================================================== */
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* =========================================================================
+   Tell Tailwind v4 to scan our UI package for class names.
+   (apps/web already scans its own ./src by default; this picks up classes
+    that live inside @repo/ui components.)
+   ========================================================================= */
+@source "../../../packages/ui/src/**/*.tsx";
+
+/* =========================================================================
+   BASE LAYER
+   ========================================================================= */
+
+@layer base {
+  /* =====================================================================
+     DARK MODE
+     Activate by adding `class="dark"` to <html> (the ThemeProvider
+     in `@repo/ui/theme-provider` does this for you). All Tailwind
+     `bg-primary` / `text-foreground` / etc. utilities flip together
+     because they resolve via these CSS variables.
+     ===================================================================== */
+
+  .dark {
+    /* Semantic aliases — flipped */
+    --color-background: #14161f;
+    --color-foreground: #e8e6e0;
+
+    --color-card: #1e202f;
+    --color-card-foreground: #e8e6e0;
+
+    --color-popover: #232539;
+    --color-popover-foreground: #e8e6e0;
+
+    /* Brand stays violet but reads brighter on dark */
+    --color-primary: #7177be;
+    --color-primary-foreground: #14161f;
+
+    --color-secondary: #232539;
+    --color-secondary-foreground: #e8e6e0;
+
+    --color-muted: #1e202f;
+    --color-muted-foreground: #9b9eb3;
+
+    /* Dark tonal: brand-800 bg with brand-200 text */
+    --color-accent: #2c3059;
+    --color-accent-foreground: #b5b9e0;
+
+    --color-destructive: #e25f4a;
+    --color-destructive-foreground: #14161f;
+
+    --color-border: #2e3148;
+    --color-input: #2e3148;
+    --color-ring: #7177be;
+
+    /* Direct palette — invert the paper/ink/line surfaces */
+    --color-paper: #14161f;
+    --color-paper-elevated: #1e202f;
+    --color-paper-sunken: #0d0f17;
+    --color-paper-texture: #1a1d2a;
+
+    --color-ink: #e8e6e0;
+    --color-ink-2: #c7c9d5;
+    --color-ink-3: #9b9eb3;
+    --color-ink-4: #717490;
+    --color-ink-5: #4e5170;
+    --color-ink-6: #2e3148;
+
+    --color-line: #2e3148;
+    --color-line-strong: #4e5170;
+    --color-line-subtle: #232539;
+
+    /* Brand · violet — shift one step lighter for legibility on dark */
+    --color-brand-50: #1d203d;
+    --color-brand-100: #2c3059;
+    --color-brand-200: #3b4076;
+    --color-brand-300: #4a4f92;
+    --color-brand-400: #595fae;
+    --color-brand-500: #7177be;
+    --color-brand-600: #8e94cf;
+    --color-brand-700: #b5b9e0;
+    --color-brand-800: #dbddf0;
+    --color-brand-900: #f0f1f8;
+
+    /* Semantic — bump 500s slightly brighter for dark visibility */
+    --color-success-500: #4fb97d;
+    --color-warning-500: #e4b033;
+    --color-danger-500: #e25f4a;
+    --color-info-500: #4fa0da;
+
+    /* Shadows · much deeper on dark */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.65), 0 8px 18px rgba(0, 0, 0, 0.4);
+    --shadow-brand: 0 4px 14px rgba(113, 119, 190, 0.45);
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-size: var(--text-base);
+    font-weight: 500; /* Quicksand reads better one notch heavier */
+    line-height: 1.55;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-foreground);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  ::selection {
+    background: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  /* Default focus ring — brand violet at 25% */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(89, 95, 174, 0.25);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* =========================================================================
+   UTILITIES — small helpers that aren't worth a full token
+   ========================================================================= */
+
+@utility marker-hl {
+  background: linear-gradient(180deg, transparent 60%, var(--color-marker-500) 60%);
+  padding-inline: 4px;
+}
