@@ -10,6 +10,7 @@ out
 coverage
 
 # Generated / lockfiles
+apps/web/src/routeTree.gen.ts
 bun.lock
 package-lock.json
 yarn.lock

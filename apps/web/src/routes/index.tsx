@@ -24,7 +24,8 @@ function Index() {
             Collaborative Whiteboards, Reimagined
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
-            Create, brainstorm, and bring your designs to life with a modern vector drafting canvas, backed by secure authentication.
+            Create, brainstorm, and bring your designs to life with a modern vector drafting canvas, backed by secure
+            authentication.
           </p>
         </div>
 

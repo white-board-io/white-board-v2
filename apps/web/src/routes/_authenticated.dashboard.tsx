@@ -15,7 +15,7 @@ type APIResponse = {
 function Dashboard() {
   const { user } = useUser();
   const { getToken } = useAuth();
-  
+
   const [apiResponse, setApiResponse] = useState<APIResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -101,8 +101,8 @@ function Dashboard() {
               <h2 className="text-lg font-bold tracking-tight">Secure Fastify API Connection</h2>
             </div>
             <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
-              Test full-stack authentication by sending an authenticated request from this React client to your local Fastify server.
-              The client will generate a secure JWT, which the Fastify plugin will decrypt and validate.
+              Test full-stack authentication by sending an authenticated request from this React client to your local
+              Fastify server. The client will generate a secure JWT, which the Fastify plugin will decrypt and validate.
             </p>
           </div>
 
@@ -178,9 +178,7 @@ function Dashboard() {
             <div className="p-4 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl flex justify-between items-center">
               <div>
                 <div className="text-xs text-zinc-500 font-medium uppercase tracking-wider">Security State</div>
-                <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1">
-                  MFA Protected
-                </div>
+                <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1">MFA Protected</div>
               </div>
               <div className="w-10 h-10 bg-emerald-50 dark:bg-emerald-950 rounded-xl flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl font-bold">
                 🛡️

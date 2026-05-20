@@ -58,11 +58,20 @@ if (!PUBLISHABLE_KEY) {
             VITE_CLERK_PUBLISHABLE_KEY=your_publishable_key
           </div>
           <p className="text-xs text-zinc-500">
-            Get your keys from the <a href="https://dashboard.clerk.com/" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Clerk Dashboard</a>.
+            Get your keys from the{" "}
+            <a
+              href="https://dashboard.clerk.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-400 hover:underline"
+            >
+              Clerk Dashboard
+            </a>
+            .
           </p>
         </div>
       </div>
-    </StrictMode>
+    </StrictMode>,
   );
 } else {
   root.render(

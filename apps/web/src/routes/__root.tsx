@@ -29,7 +29,9 @@ export const Route = createRootRouteWithContext<RouterContext>()({
               <Link
                 to="/"
                 activeProps={{ className: "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50" }}
-                inactiveProps={{ className: "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" }}
+                inactiveProps={{
+                  className: "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50",
+                }}
                 className="px-3 py-1.5 rounded-lg transition-colors"
               >
                 Home
@@ -38,7 +40,9 @@ export const Route = createRootRouteWithContext<RouterContext>()({
                 <Link
                   to="/dashboard"
                   activeProps={{ className: "bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50" }}
-                  inactiveProps={{ className: "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" }}
+                  inactiveProps={{
+                    className: "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50",
+                  }}
                   className="px-3 py-1.5 rounded-lg transition-colors"
                 >
                   Dashboard
@@ -64,7 +68,9 @@ export const Route = createRootRouteWithContext<RouterContext>()({
                 >
                   Go to App
                 </Link>
-                <UserButton appearance={{ elements: { avatarBox: "h-9 w-9 border border-zinc-200/50 dark:border-zinc-800/50" } }} />
+                <UserButton
+                  appearance={{ elements: { avatarBox: "h-9 w-9 border border-zinc-200/50 dark:border-zinc-800/50" } }}
+                />
               </div>
             </SignedIn>
           </div>
