@@ -96,7 +96,9 @@ function SelectWorkspacePage() {
                 <button
                   type="button"
                   disabled={selectingId !== null}
-                  onClick={() => { void onSelect(organization.id); }}
+                  onClick={() => {
+                    void onSelect(organization.id);
+                  }}
                   className="group flex w-full items-center gap-4 rounded-xl border border-border p-4 text-left transition-colors hover:border-primary/60 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -109,7 +111,10 @@ function SelectWorkspacePage() {
                   {isSelecting ? (
                     <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                   ) : (
-                    <ChevronRight size={18} className="shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                    <ChevronRight
+                      size={18}
+                      className="shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+                    />
                   )}
                 </button>
               </li>

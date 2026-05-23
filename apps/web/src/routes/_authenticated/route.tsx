@@ -14,9 +14,7 @@ function AuthenticatedLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const soleOrgId =
-    orgsLoaded && !orgId && userMemberships.count === 1
-      ? userMemberships.data[0]?.organization.id
-      : undefined;
+    orgsLoaded && !orgId && userMemberships.count === 1 ? userMemberships.data[0]?.organization.id : undefined;
 
   useEffect(() => {
     if (soleOrgId && setActive) {
@@ -68,31 +66,37 @@ function AuthenticatedLayout() {
     <div className="flex h-screen overflow-hidden bg-background text-foreground antialiased">
       {/* Mobile backdrop */}
       {mobileOpen && (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
         <div
           className="fixed inset-0 z-40 bg-black/40 lg:hidden"
-          onClick={() => { setMobileOpen(false); }}
+          onClick={() => {
+            setMobileOpen(false);
+          }}
         />
       )}
 
       {/* Sidebar */}
-      <AppSidebar mobileOpen={mobileOpen} onMobileClose={() => { setMobileOpen(false); }} />
+      <AppSidebar
+        mobileOpen={mobileOpen}
+        onMobileClose={() => {
+          setMobileOpen(false);
+        }}
+      />
 
       {/* Main area */}
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         {/* Mobile top bar */}
         <header className="lg:hidden flex items-center gap-3 h-14 px-4 border-b border-border bg-card shrink-0">
           <button
-            onClick={() => { setMobileOpen(true); }}
+            onClick={() => {
+              setMobileOpen(true);
+            }}
             className="p-1.5 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Open menu"
           >
             <Menu className="size-5" />
           </button>
-          <Link
-            to="/discover"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          >
+          <Link to="/discover" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <img src="/whiteboard-logo.svg" alt="" className="w-7 h-7" />
             <span className="font-bold text-sm text-foreground">WhiteBoard</span>
           </Link>

@@ -10,12 +10,7 @@ import { Button } from "@repo/ui/button";
 import { Input } from "@repo/ui/input";
 import { Label } from "@repo/ui/label";
 
-const SIGNUP_BACKGROUNDS = [
-  "/images/login/1.jpg",
-  "/images/login/2.jpg",
-  "/images/login/3.jpg",
-  "/images/login/4.jpg",
-];
+const SIGNUP_BACKGROUNDS = ["/images/login/1.jpg", "/images/login/2.jpg", "/images/login/3.jpg", "/images/login/4.jpg"];
 
 export const Route = createFileRoute("/_public/signup")({
   component: SignupPage,
@@ -124,16 +119,16 @@ function SignupPage() {
                 {step === "details" ? "Create your account" : "Verify your email"}
               </h1>
               <p className="text-sm text-muted-foreground">
-                {step === "details"
-                  ? "Get started with Whiteboard"
-                  : "Enter the 6-digit code we emailed you"}
+                {step === "details" ? "Get started with Whiteboard" : "Enter the 6-digit code we emailed you"}
               </p>
             </div>
           </div>
 
           {step === "details" ? (
             <form
-              onSubmit={(e) => { void detailsForm.handleSubmit(onSubmitDetails)(e); }}
+              onSubmit={(e) => {
+                void detailsForm.handleSubmit(onSubmitDetails)(e);
+              }}
               className="space-y-4"
               noValidate
             >
@@ -192,7 +187,9 @@ function SignupPage() {
                   <button
                     type="button"
                     aria-label={showPassword ? "Hide password" : "Show password"}
-                    onClick={() => { setShowPassword((v) => !v); }}
+                    onClick={() => {
+                      setShowPassword((v) => !v);
+                    }}
                     className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -212,17 +209,15 @@ function SignupPage() {
                 </p>
               )}
 
-              <Button
-                type="submit"
-                disabled={detailsForm.formState.isSubmitting || !isLoaded}
-                className="w-full mt-4"
-              >
+              <Button type="submit" disabled={detailsForm.formState.isSubmitting || !isLoaded} className="w-full mt-4">
                 {detailsForm.formState.isSubmitting ? "Creating account…" : "Create account"}
               </Button>
             </form>
           ) : (
             <form
-              onSubmit={(e) => { void verifyForm.handleSubmit(onSubmitVerify)(e); }}
+              onSubmit={(e) => {
+                void verifyForm.handleSubmit(onSubmitVerify)(e);
+              }}
               className="space-y-4"
               noValidate
             >
@@ -249,11 +244,7 @@ function SignupPage() {
                 </p>
               )}
 
-              <Button
-                type="submit"
-                disabled={verifyForm.formState.isSubmitting || !isLoaded}
-                className="w-full mt-4"
-              >
+              <Button type="submit" disabled={verifyForm.formState.isSubmitting || !isLoaded} className="w-full mt-4">
                 {verifyForm.formState.isSubmitting ? "Verifying…" : "Verify email"}
               </Button>
 
@@ -265,7 +256,9 @@ function SignupPage() {
                     Didn&apos;t get the code?{" "}
                     <button
                       type="button"
-                      onClick={() => { void resendCode(); }}
+                      onClick={() => {
+                        void resendCode();
+                      }}
                       className="font-semibold text-primary hover:underline cursor-pointer"
                     >
                       Resend code

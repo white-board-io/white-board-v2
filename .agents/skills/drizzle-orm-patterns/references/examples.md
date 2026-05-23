@@ -15,22 +15,22 @@ Complete working examples for common Drizzle ORM use cases. For detailed pattern
 A complete example showing how to define tables with foreign keys and set up bidirectional relations.
 
 ```typescript
-import { pgTable, serial, text, integer, timestamp } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
 // Define tables
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull().unique(),
-  createdAt: timestamp('created_at').defaultNow(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  authorId: integer('author_id').references(() => users.id),
-  createdAt: timestamp('created_at').defaultNow(),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  authorId: integer("author_id").references(() => users.id),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 // Define relations
@@ -69,22 +69,22 @@ const postsWithAuthor = await db.query.posts.findMany({
 Basic Create, Read, Update, Delete operations with Drizzle ORM.
 
 ```typescript
-import { eq } from 'drizzle-orm';
+import { eq } from "drizzle-orm";
 
 // Insert a new user
-const [newUser] = await db.insert(users).values({
-  name: 'John',
-  email: 'john@example.com',
-}).returning();
+const [newUser] = await db
+  .insert(users)
+  .values({
+    name: "John",
+    email: "john@example.com",
+  })
+  .returning();
 
 // Select user by email
-const [user] = await db.select().from(users).where(eq(users.email, 'john@example.com'));
+const [user] = await db.select().from(users).where(eq(users.email, "john@example.com"));
 
 // Update user name
-const [updated] = await db.update(users)
-  .set({ name: 'John Updated' })
-  .where(eq(users.id, 1))
-  .returning();
+const [updated] = await db.update(users).set({ name: "John Updated" }).where(eq(users.id, 1)).returning();
 
 // Delete user
 await db.delete(users).where(eq(users.id, 1));
@@ -94,17 +94,17 @@ await db.delete(users).where(eq(users.id, 1));
 
 ```typescript
 // Insert multiple users
-const newUsers = await db.insert(users).values([
-  { name: 'John', email: 'john@example.com' },
-  { name: 'Jane', email: 'jane@example.com' },
-  { name: 'Bob', email: 'bob@example.com' },
-]).returning();
+const newUsers = await db
+  .insert(users)
+  .values([
+    { name: "John", email: "john@example.com" },
+    { name: "Jane", email: "jane@example.com" },
+    { name: "Bob", email: "bob@example.com" },
+  ])
+  .returning();
 
 // Select multiple users with filter
-const activeUsers = await db
-  .select()
-  .from(users)
-  .where(eq(users.verified, true));
+const activeUsers = await db.select().from(users).where(eq(users.verified, true));
 ```
 
 ---
@@ -114,7 +114,7 @@ const activeUsers = await db
 A money transfer example demonstrating transaction rollback on insufficient funds.
 
 ```typescript
-import { eq, sql } from 'drizzle-orm';
+import { eq, sql } from "drizzle-orm";
 
 async function transferFunds(fromId: number, toId: number, amount: number) {
   await db.transaction(async (tx) => {
@@ -124,11 +124,13 @@ async function transferFunds(fromId: number, toId: number, amount: number) {
       tx.rollback(); // Rolls back all changes
     }
 
-    await tx.update(accounts)
+    await tx
+      .update(accounts)
       .set({ balance: sql`${accounts.balance} - ${amount}` })
       .where(eq(accounts.userId, fromId));
 
-    await tx.update(accounts)
+    await tx
+      .update(accounts)
       .set({ balance: sql`${accounts.balance} + ${amount}` })
       .where(eq(accounts.userId, toId));
   });
@@ -141,21 +143,20 @@ async function transferFunds(fromId: number, toId: number, amount: number) {
 async function safeTransfer(fromId: number, toId: number, amount: number) {
   try {
     const result = await db.transaction(async (tx) => {
-      const [fromAccount] = await tx
-        .select()
-        .from(accounts)
-        .where(eq(accounts.userId, fromId));
+      const [fromAccount] = await tx.select().from(accounts).where(eq(accounts.userId, fromId));
 
       if (!fromAccount || fromAccount.balance < amount) {
         tx.rollback();
-        return { success: false, error: 'Insufficient funds' };
+        return { success: false, error: "Insufficient funds" };
       }
 
-      await tx.update(accounts)
+      await tx
+        .update(accounts)
         .set({ balance: sql`${accounts.balance} - ${amount}` })
         .where(eq(accounts.userId, fromId));
 
-      await tx.update(accounts)
+      await tx
+        .update(accounts)
         .set({ balance: sql`${accounts.balance} + ${amount}` })
         .where(eq(accounts.userId, toId));
 
@@ -164,7 +165,7 @@ async function safeTransfer(fromId: number, toId: number, amount: number) {
 
     return result;
   } catch (error) {
-    return { success: false, error: 'Transaction failed' };
+    return { success: false, error: "Transaction failed" };
   }
 }
 ```
@@ -176,7 +177,7 @@ async function safeTransfer(fromId: number, toId: number, amount: number) {
 Retrieving users with their posts using joins.
 
 ```typescript
-import { eq } from 'drizzle-orm';
+import { eq } from "drizzle-orm";
 
 const usersWithPosts = await db
   .select({
@@ -203,7 +204,7 @@ const usersWithPosts = await db
 Implementing cursor-based pagination for large datasets.
 
 ```typescript
-import { gt, asc } from 'drizzle-orm';
+import { gt, asc } from "drizzle-orm";
 
 async function getUsersPaginated(cursor?: number, limit = 10) {
   const query = db
@@ -240,7 +241,7 @@ const secondPage = await getUsersPaginated(firstPage.nextCursor);
 Calculating user statistics with aggregations.
 
 ```typescript
-import { count, avg, sql, gt } from 'drizzle-orm';
+import { count, avg, sql, gt } from "drizzle-orm";
 
 const stats = await db
   .select({
@@ -268,33 +269,24 @@ const ageGroups = await db
 Implementing soft delete to preserve data integrity.
 
 ```typescript
-import { isNull } from 'drizzle-orm';
+import { isNull } from "drizzle-orm";
 
 // Schema with deletedAt
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull().unique(),
-  deletedAt: timestamp('deleted_at'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  deletedAt: timestamp("deleted_at"),
 });
 
 // Always query non-deleted users
-const activeUsers = await db
-  .select()
-  .from(users)
-  .where(isNull(users.deletedAt));
+const activeUsers = await db.select().from(users).where(isNull(users.deletedAt));
 
 // Soft delete instead of hard delete
-await db
-  .update(users)
-  .set({ deletedAt: new Date() })
-  .where(eq(users.id, userId));
+await db.update(users).set({ deletedAt: new Date() }).where(eq(users.id, userId));
 
 // Restore soft-deleted user
-await db
-  .update(users)
-  .set({ deletedAt: null })
-  .where(eq(users.id, userId));
+await db.update(users).set({ deletedAt: null }).where(eq(users.id, userId));
 ```
 
 ---
@@ -304,7 +296,7 @@ await db
 A complete repository class using Drizzle ORM.
 
 ```typescript
-import { eq, ilike, desc } from 'drizzle-orm';
+import { eq, ilike, desc } from "drizzle-orm";
 
 class UserRepository {
   constructor(private db: typeof db) {}
@@ -315,18 +307,12 @@ class UserRepository {
   }
 
   async findById(id: number) {
-    const [user] = await this.db
-      .select()
-      .from(users)
-      .where(eq(users.id, id));
+    const [user] = await this.db.select().from(users).where(eq(users.id, id));
     return user;
   }
 
   async findByEmail(email: string) {
-    const [user] = await this.db
-      .select()
-      .from(users)
-      .where(eq(users.email, email));
+    const [user] = await this.db.select().from(users).where(eq(users.email, email));
     return user;
   }
 
@@ -339,11 +325,7 @@ class UserRepository {
   }
 
   async update(id: number, data: Partial<typeof users.$inferInsert>) {
-    const [user] = await this.db
-      .update(users)
-      .set(data)
-      .where(eq(users.id, id))
-      .returning();
+    const [user] = await this.db.update(users).set(data).where(eq(users.id, id)).returning();
     return user;
   }
 

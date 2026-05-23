@@ -10,12 +10,7 @@ import { Button } from "@repo/ui/button";
 import { Input } from "@repo/ui/input";
 import { Label } from "@repo/ui/label";
 
-const BACKGROUNDS = [
-  "/images/login/1.jpg",
-  "/images/login/2.jpg",
-  "/images/login/3.jpg",
-  "/images/login/4.jpg",
-];
+const BACKGROUNDS = ["/images/login/1.jpg", "/images/login/2.jpg", "/images/login/3.jpg", "/images/login/4.jpg"];
 
 export const Route = createFileRoute("/_public/forgot-password")({
   component: ForgotPasswordPage,
@@ -105,16 +100,16 @@ function ForgotPasswordPage() {
             <div className="space-y-1">
               <h1 className="text-2xl font-bold text-foreground">Reset your password</h1>
               <p className="text-sm text-muted-foreground">
-                {step === "request"
-                  ? "We'll email you a reset code"
-                  : "Enter the code and choose a new password"}
+                {step === "request" ? "We'll email you a reset code" : "Enter the code and choose a new password"}
               </p>
             </div>
           </div>
 
           {step === "request" ? (
             <form
-              onSubmit={(e) => { void requestForm.handleSubmit(onSubmitRequest)(e); }}
+              onSubmit={(e) => {
+                void requestForm.handleSubmit(onSubmitRequest)(e);
+              }}
               className="space-y-4"
               noValidate
             >
@@ -140,17 +135,15 @@ function ForgotPasswordPage() {
                 </p>
               )}
 
-              <Button
-                type="submit"
-                disabled={requestForm.formState.isSubmitting || !isLoaded}
-                className="w-full mt-4"
-              >
+              <Button type="submit" disabled={requestForm.formState.isSubmitting || !isLoaded} className="w-full mt-4">
                 {requestForm.formState.isSubmitting ? "Sending…" : "Send reset code"}
               </Button>
             </form>
           ) : (
             <form
-              onSubmit={(e) => { void resetForm.handleSubmit(onSubmitReset)(e); }}
+              onSubmit={(e) => {
+                void resetForm.handleSubmit(onSubmitReset)(e);
+              }}
               className="space-y-4"
               noValidate
             >
@@ -185,7 +178,9 @@ function ForgotPasswordPage() {
                   <button
                     type="button"
                     aria-label={showPassword ? "Hide password" : "Show password"}
-                    onClick={() => { setShowPassword((v) => !v); }}
+                    onClick={() => {
+                      setShowPassword((v) => !v);
+                    }}
                     className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -202,11 +197,7 @@ function ForgotPasswordPage() {
                 </p>
               )}
 
-              <Button
-                type="submit"
-                disabled={resetForm.formState.isSubmitting || !isLoaded}
-                className="w-full mt-4"
-              >
+              <Button type="submit" disabled={resetForm.formState.isSubmitting || !isLoaded} className="w-full mt-4">
                 {resetForm.formState.isSubmitting ? "Resetting…" : "Reset password"}
               </Button>
             </form>

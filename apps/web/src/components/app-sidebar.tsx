@@ -25,12 +25,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@repo/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@repo/ui/tooltip";
 
 function cn(...classes: (string | false | undefined | null)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -99,8 +94,9 @@ export function AppSidebar({ mobileOpen, onMobileClose }: Props) {
   const { organization } = useOrganization();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  const toggleSection = (title: string) =>
-    { setExpandedSections((prev) => ({ ...prev, [title]: !prev[title] })); };
+  const toggleSection = (title: string) => {
+    setExpandedSections((prev) => ({ ...prev, [title]: !prev[title] }));
+  };
 
   return (
     <TooltipProvider delayDuration={300}>
@@ -125,23 +121,14 @@ export function AppSidebar({ mobileOpen, onMobileClose }: Props) {
           {/* Logo + name (expanded) */}
           <Link
             to="/discover"
-            className={cn(
-              "flex items-center gap-2 hover:opacity-80 transition-opacity",
-              collapsed && "lg:hidden",
-            )}
+            className={cn("flex items-center gap-2 hover:opacity-80 transition-opacity", collapsed && "lg:hidden")}
           >
             <img src="/whiteboard-logo.svg" alt="" className="w-7 h-7 shrink-0" />
             <span className="font-bold text-sm text-foreground">WhiteBoard</span>
           </Link>
 
           {/* Logo icon only (collapsed desktop) */}
-          <Link
-            to="/discover"
-            className={cn(
-              "hidden hover:opacity-80 transition-opacity",
-              collapsed && "lg:flex",
-            )}
-          >
+          <Link to="/discover" className={cn("hidden hover:opacity-80 transition-opacity", collapsed && "lg:flex")}>
             <img src="/whiteboard-logo.svg" alt="" className="w-7 h-7" />
           </Link>
 
@@ -156,7 +143,9 @@ export function AppSidebar({ mobileOpen, onMobileClose }: Props) {
 
           {/* Collapse toggle — desktop only */}
           <button
-            onClick={() => { setCollapsed((c) => !c); }}
+            onClick={() => {
+              setCollapsed((c) => !c);
+            }}
             className={cn(
               "hidden lg:flex p-1.5 rounded-md hover:bg-secondary",
               "text-muted-foreground hover:text-foreground transition-colors",
@@ -180,9 +169,7 @@ export function AppSidebar({ mobileOpen, onMobileClose }: Props) {
               {user?.firstName} {user?.lastName}
             </p>
             {organization && (
-              <p className="text-xs text-muted-foreground truncate leading-tight mt-0.5">
-                {organization.name}
-              </p>
+              <p className="text-xs text-muted-foreground truncate leading-tight mt-0.5">{organization.name}</p>
             )}
           </div>
         </div>
@@ -195,9 +182,7 @@ export function AppSidebar({ mobileOpen, onMobileClose }: Props) {
 
             return (
               <div key={section.title}>
-                {sectionIdx > 0 && (
-                  <div className={cn("my-2 border-t border-border", collapsed && "lg:mx-2")} />
-                )}
+                {sectionIdx > 0 && <div className={cn("my-2 border-t border-border", collapsed && "lg:mx-2")} />}
 
                 {/* Section header — hidden in icon-only mode */}
                 <button
@@ -246,9 +231,7 @@ export function AppSidebar({ mobileOpen, onMobileClose }: Props) {
                           )}
                         >
                           <Icon className="size-4 shrink-0" />
-                          <span className={cn("truncate", collapsed && "lg:hidden")}>
-                            {item.label}
-                          </span>
+                          <span className={cn("truncate", collapsed && "lg:hidden")}>{item.label}</span>
                         </Link>
                       );
 

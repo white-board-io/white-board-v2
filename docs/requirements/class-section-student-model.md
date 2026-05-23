@@ -1,9 +1,11 @@
 # Requirement: Class, Section, and Student Model
 
 ## Status
+
 Draft
 
 ## Purpose
+
 Whiteboard needs a simple school structure that supports Indian school operations without locking the product into one board, state, or academic calendar. This requirement defines the first version of Classes, Sections, Students, and Student Enrolments for a school Workspace.
 
 The model must support:
@@ -15,6 +17,7 @@ The model must support:
 - Historical records for marks, attendance, fees, reports, and transfer certificates later.
 
 ## Scope
+
 In scope for the first version:
 
 - Academic years.
@@ -33,6 +36,7 @@ Out of scope for the first version:
 - Student login and parent login.
 
 ## Domain Language
+
 **Workspace**
 The tenant boundary of the product. For a school, the Workspace represents one educational institution.
 
@@ -52,6 +56,7 @@ The person studying in the school. The Student record stores identity informatio
 The record that places a Student into one Class Section for one Academic Year. A new enrolment is created when a student is promoted, repeated, transferred to another section, or admitted into a new academic year.
 
 ## Product Rules
+
 1. A Grade Level is not tied to one Academic Year.
 2. A Section name by itself is not treated as a major entity in the MVP.
 3. A Class Section always belongs to one Academic Year and one Grade Level.
@@ -62,7 +67,9 @@ The record that places a Student into one Class Section for one Academic Year. A
 8. The UI may display `Class 5 - A`, but the database should store grade level and section separately.
 
 ## Recommended Data Model
+
 ### academic_years
+
 Stores the school-owned academic calendar.
 
 ```txt
@@ -85,6 +92,7 @@ Rules:
 - `starts_on` must be before `ends_on`.
 
 ### grade_levels
+
 Stores reusable class levels.
 
 ```txt
@@ -106,6 +114,7 @@ Rules:
 - Archived grade levels should not be available for new Class Sections.
 
 ### class_sections
+
 Stores the actual class-section for one academic year.
 
 ```txt
@@ -140,6 +149,7 @@ Display: Class 5 - A
 ```
 
 ### students
+
 Stores the student identity record. This is intentionally small for the first version.
 
 ```txt
@@ -165,6 +175,7 @@ Rules:
 - Students should not be hard-deleted once they have enrolments. Mark inactive instead.
 
 ### student_enrolments
+
 Connects a Student to a Class Section for an Academic Year.
 
 ```txt
@@ -192,6 +203,7 @@ Rules:
 - When a student is promoted, the previous enrolment remains as history and a new enrolment is created in the next Academic Year.
 
 ## Why Section Is Not a Separate MVP Table
+
 A plain section value like `A` does not have enough meaning by itself. `Class 1 - A`, `Class 5 - A`, and `Class 10 - A` are different operational groups. The same is true across academic years.
 
 For the MVP, store the section name directly on `class_sections`.
@@ -210,7 +222,9 @@ section_templates
 This is deferred until there is a real product need.
 
 ## Core Workflows
+
 ### Set Up Academic Year
+
 The school admin creates or confirms the current Academic Year.
 
 Example:
@@ -224,6 +238,7 @@ Current: true
 ```
 
 ### Set Up Classes
+
 The school admin creates Grade Levels once for the Workspace.
 
 Example:
@@ -239,6 +254,7 @@ Class 12
 ```
 
 ### Set Up Sections
+
 For the current Academic Year, the school admin creates Class Sections.
 
 Example:
@@ -258,6 +274,7 @@ Example:
 ```
 
 ### Create Student
+
 The school admin creates a Student with minimal required details.
 
 Required fields:
@@ -271,6 +288,7 @@ Optional fields:
 - Middle Name
 
 ### Enrol Student
+
 The school admin selects:
 
 - Academic Year
@@ -280,6 +298,7 @@ The school admin selects:
 The system creates a Student Enrolment linking the Student to the selected Class Section.
 
 ### Promote Student
+
 The school admin promotes a student from one Academic Year to the next.
 
 Example:
@@ -292,6 +311,7 @@ Example:
 The old enrolment remains unchanged. The new enrolment records the new class placement.
 
 ## UI Requirements
+
 1. In setup screens, use the label "Class" for Grade Level because that matches school vocabulary.
 2. In technical documentation and code, prefer `GradeLevel` to avoid confusion with programming classes.
 3. In student lists, show the current Class Section as `Class 5 - A`.
@@ -300,6 +320,7 @@ The old enrolment remains unchanged. The new enrolment records the new class pla
 6. The student profile should show the current enrolment and, later, past enrolment history.
 
 ## MVP Acceptance Criteria
+
 1. Admin can create an Academic Year.
 2. Admin can create Grade Levels for the Workspace.
 3. Admin can create Class Sections under an Academic Year and Grade Level.
@@ -311,6 +332,7 @@ The old enrolment remains unchanged. The new enrolment records the new class pla
 9. Student class history is preserved across academic years.
 
 ## Open Questions
+
 1. Should `last_name` be required for all students, or should the system support single-name students from day one?
 2. Should admission number be added now, even if other student profile fields are deferred?
 3. Should roll number be required during enrolment or optional until class lists are finalized?

@@ -7,10 +7,7 @@ import { z } from "zod";
 const MAX_WORKSPACES_PER_USER = 49;
 
 const createWorkspaceSchema = z.object({
-  name: z
-    .string()
-    .min(1, "Workspace name is required.")
-    .max(999, "Workspace name must be 999 characters or fewer."),
+  name: z.string().min(1, "Workspace name is required.").max(999, "Workspace name must be 999 characters or fewer."),
   orgType: z.enum(["school", "training_institute", "online_institute"] as const, {
     error: "A valid workspace type is required.",
   }),
@@ -113,9 +110,7 @@ const startServer = async () => {
     try {
       const { totalCount } = await clerkClient.users.getOrganizationMembershipList({ userId, limit: 1 });
       if (totalCount >= MAX_WORKSPACES_PER_USER) {
-        return reply
-          .status(403)
-          .send({ message: `You can belong to at most ${MAX_WORKSPACES_PER_USER} workspaces.` });
+        return reply.status(403).send({ message: `You can belong to at most ${MAX_WORKSPACES_PER_USER} workspaces.` });
       }
 
       const organization = await clerkClient.organizations.createOrganization({

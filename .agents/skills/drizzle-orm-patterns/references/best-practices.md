@@ -58,33 +58,45 @@ Use transactions for multi-step operations that must succeed together.
 ```typescript
 // Good: Transfer with transaction
 await db.transaction(async (tx) => {
-  await tx.update(accounts).set({ balance: fromBalance - amount }).where(eq(accounts.id, fromId));
-  await tx.update(accounts).set({ balance: toBalance + amount }).where(eq(accounts.id, toId));
+  await tx
+    .update(accounts)
+    .set({ balance: fromBalance - amount })
+    .where(eq(accounts.id, fromId));
+  await tx
+    .update(accounts)
+    .set({ balance: toBalance + amount })
+    .where(eq(accounts.id, toId));
 });
 
 // Bad: No transaction - partial failure possible
-await db.update(accounts).set({ balance: fromBalance - amount }).where(eq(accounts.id, fromId));
-await db.update(accounts).set({ balance: toBalance + amount }).where(eq(accounts.id, toId));
+await db
+  .update(accounts)
+  .set({ balance: fromBalance - amount })
+  .where(eq(accounts.id, fromId));
+await db
+  .update(accounts)
+  .set({ balance: toBalance + amount })
+  .where(eq(accounts.id, toId));
 ```
 
 ### 4. Migrations
 
 Use the appropriate migration strategy for each environment:
 
-| Environment | Command | Use Case |
-|-------------|---------|----------|
-| Development | `drizzle-kit push` | Quick schema sync |
-| Production | `drizzle-kit generate` + `drizzle-kit migrate` | Versioned migrations |
-| Recovery | `drizzle-kit pull` | Recreate schema from DB |
+| Environment | Command                                        | Use Case                |
+| ----------- | ---------------------------------------------- | ----------------------- |
+| Development | `drizzle-kit push`                             | Quick schema sync       |
+| Production  | `drizzle-kit generate` + `drizzle-kit migrate` | Versioned migrations    |
+| Recovery    | `drizzle-kit pull`                             | Recreate schema from DB |
 
 ```typescript
 // drizzle.config.ts
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  schema: './src/db/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
+  schema: "./src/db/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
@@ -96,15 +108,19 @@ export default defineConfig({
 Add indexes on frequently queried columns and foreign keys.
 
 ```typescript
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  authorId: integer('author_id').references(() => users.id),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-}, (table) => [
-  index('author_idx').on(table.authorId),    // For filtering by author
-  index('created_idx').on(table.createdAt),  // For sorting by date
-]);
+export const posts = pgTable(
+  "posts",
+  {
+    id: serial("id").primaryKey(),
+    title: text("title").notNull(),
+    authorId: integer("author_id").references(() => users.id),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [
+    index("author_idx").on(table.authorId), // For filtering by author
+    index("created_idx").on(table.createdAt), // For sorting by date
+  ],
+);
 ```
 
 ### 6. Soft Deletes
@@ -112,17 +128,14 @@ export const posts = pgTable('posts', {
 Use `deletedAt` timestamp instead of hard deletes when data retention is required.
 
 ```typescript
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  deletedAt: timestamp('deleted_at'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  deletedAt: timestamp("deleted_at"),
 });
 
 // Always filter deleted records
-const activeUsers = await db
-  .select()
-  .from(users)
-  .where(isNull(users.deletedAt));
+const activeUsers = await db.select().from(users).where(isNull(users.deletedAt));
 ```
 
 ### 7. Pagination
@@ -131,12 +144,7 @@ Use cursor-based pagination for large datasets to avoid OFFSET performance issue
 
 ```typescript
 // Good: Cursor-based (efficient for large datasets)
-const users = await db
-  .select()
-  .from(users)
-  .where(gt(users.id, lastId))
-  .orderBy(asc(users.id))
-  .limit(10);
+const users = await db.select().from(users).where(gt(users.id, lastId)).orderBy(asc(users.id)).limit(10);
 
 // Acceptable: OFFSET-based (okay for small datasets)
 const users = await db
@@ -153,11 +161,7 @@ Use `.limit()` and `.where()` to fetch only needed data.
 
 ```typescript
 // Good: Specific columns and limit
-const userNames = await db
-  .select({ name: users.name })
-  .from(users)
-  .where(eq(users.verified, true))
-  .limit(10);
+const userNames = await db.select({ name: users.name }).from(users).where(eq(users.verified, true)).limit(10);
 
 // Bad: Selecting all columns and rows
 const allUsers = await db.select().from(users);
@@ -200,19 +204,19 @@ try {
 
 Not all databases support `.returning()`. Check your dialect compatibility:
 
-| Database | Returning Support |
-|----------|-------------------|
-| PostgreSQL | Full support |
-| MySQL | Limited (8.0.19+) |
-| SQLite | Limited (3.35.0+) |
-| MSSQL | Use `OUTPUT` clause |
+| Database   | Returning Support   |
+| ---------- | ------------------- |
+| PostgreSQL | Full support        |
+| MySQL      | Limited (8.0.19+)   |
+| SQLite     | Limited (3.35.0+)   |
+| MSSQL      | Use `OUTPUT` clause |
 
 ### Type Inference
 
 For newer type-safe patterns, use `InferSelectModel` and `InferInsertModel` from `drizzle-orm`:
 
 ```typescript
-import { InferSelectModel, InferInsertModel } from 'drizzle-orm';
+import { InferSelectModel, InferInsertModel } from "drizzle-orm";
 
 type User = InferSelectModel<typeof users>;
 type NewUser = InferInsertModel<typeof users>;
@@ -258,10 +262,7 @@ Remember to always filter `deletedAt IS NULL` in queries:
 
 ```typescript
 // Good: Explicitly filter soft-deleted
-const activeUsers = await db
-  .select()
-  .from(users)
-  .where(isNull(users.deletedAt));
+const activeUsers = await db.select().from(users).where(isNull(users.deletedAt));
 
 // Bad: Returns all including deleted
 const allUsers = await db.select().from(users);
@@ -276,8 +277,8 @@ const allUsers = await db.select().from(users);
 Use connection pooling for production workloads:
 
 ```typescript
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { Pool } from 'pg';
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -298,17 +299,17 @@ await db.select().from(users).where(eq(users.id, userId));
 // Acceptable: Dynamic with caution
 const conditions = [eq(users.active, true)];
 if (name) conditions.push(like(users.name, `%${name}%`));
-await db.select().from(users).where(and(...conditions));
+await db
+  .select()
+  .from(users)
+  .where(and(...conditions));
 ```
 
 ### Select Only Needed Columns
 
 ```typescript
 // Good: Select specific columns
-const { name, email } = await db
-  .select({ name: users.name, email: users.email })
-  .from(users)
-  .where(eq(users.id, 1));
+const { name, email } = await db.select({ name: users.name, email: users.email }).from(users).where(eq(users.id, 1));
 
 // Bad: Select all columns
 const [user] = await db.select().from(users).where(eq(users.id, 1));

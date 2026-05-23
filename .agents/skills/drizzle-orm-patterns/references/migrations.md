@@ -3,12 +3,12 @@
 ## Configuration (drizzle.config.ts)
 
 ```typescript
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  schema: './src/db/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
+  schema: "./src/db/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
@@ -18,11 +18,12 @@ export default defineConfig({
 ## Configuration for Different Databases
 
 ### PostgreSQL
+
 ```typescript
 export default defineConfig({
-  schema: './src/db/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
+  schema: "./src/db/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
@@ -30,11 +31,12 @@ export default defineConfig({
 ```
 
 ### MySQL
+
 ```typescript
 export default defineConfig({
-  schema: './src/db/schema.ts',
-  out: './drizzle',
-  dialect: 'mysql',
+  schema: "./src/db/schema.ts",
+  out: "./drizzle",
+  dialect: "mysql",
   dbCredentials: {
     host: process.env.DB_HOST!,
     port: parseInt(process.env.DB_PORT!),
@@ -46,13 +48,14 @@ export default defineConfig({
 ```
 
 ### SQLite
+
 ```typescript
 export default defineConfig({
-  schema: './src/db/schema.ts',
-  out: './drizzle',
-  dialect: 'sqlite',
+  schema: "./src/db/schema.ts",
+  out: "./drizzle",
+  dialect: "sqlite",
   dbCredentials: {
-    url: './local-db.sqlite',
+    url: "./local-db.sqlite",
   },
 });
 ```
@@ -93,13 +96,13 @@ npx drizzle-kit studio
 ## Programmatic Migration
 
 ```typescript
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { migrate } from 'drizzle-orm/node-postgres/migrator';
+import { drizzle } from "drizzle-orm/node-postgres";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 const db = drizzle(process.env.DATABASE_URL);
 
 // Run migrations
-await migrate(db, { migrationsFolder: './drizzle' });
+await migrate(db, { migrationsFolder: "./drizzle" });
 ```
 
 ## Migration File Structure

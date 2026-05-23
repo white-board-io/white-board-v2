@@ -3,21 +3,21 @@
 ## One-to-Many (v1 syntax)
 
 ```typescript
-import { relations } from 'drizzle-orm';
+import { relations } from "drizzle-orm";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
   posts: many(posts),
 }));
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  content: text('content').notNull(),
-  authorId: integer('author_id').references(() => users.id),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  content: text("content").notNull(),
+  authorId: integer("author_id").references(() => users.id),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
@@ -31,10 +31,12 @@ export const postsRelations = relations(posts, ({ one }) => ({
 ## One-to-One
 
 ```typescript
-export const profiles = pgTable('profiles', {
-  id: serial('id').primaryKey(),
-  userId: integer('user_id').references(() => users.id).unique(),
-  bio: text('bio'),
+export const profiles = pgTable("profiles", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .references(() => users.id)
+    .unique(),
+  bio: text("bio"),
 });
 
 export const profilesRelations = relations(profiles, ({ one }) => ({
@@ -52,22 +54,30 @@ export const usersRelations = relations(users, ({ one }) => ({
 ## Many-to-Many (v2 syntax with defineRelations)
 
 ```typescript
-import { defineRelations } from 'drizzle-orm';
+import { defineRelations } from "drizzle-orm";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 
-export const groups = pgTable('groups', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+export const groups = pgTable("groups", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 
-export const usersToGroups = pgTable('users_to_groups', {
-  userId: integer('user_id').notNull().references(() => users.id),
-  groupId: integer('group_id').notNull().references(() => groups.id),
-}, (t) => [primaryKey({ columns: [t.userId, t.groupId] })]);
+export const usersToGroups = pgTable(
+  "users_to_groups",
+  {
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id),
+    groupId: integer("group_id")
+      .notNull()
+      .references(() => groups.id),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.groupId] })],
+);
 
 export const relations = defineRelations({ users, groups, usersToGroups }, (r) => ({
   users: {
@@ -85,7 +95,7 @@ export const relations = defineRelations({ users, groups, usersToGroups }, (r) =
 ## Many-to-Many (v1 syntax)
 
 ```typescript
-import { relations } from 'drizzle-orm';
+import { relations } from "drizzle-orm";
 
 export const usersRelations = relations(users, ({ many }) => ({
   usersToGroups: many(usersToGroups),
@@ -110,10 +120,10 @@ export const usersToGroupsRelations = relations(usersToGroups, ({ one }) => ({
 ## Self-Referential Relation
 
 ```typescript
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  invitedBy: integer('invited_by').references((): AnyPgColumn => users.id),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  invitedBy: integer("invited_by").references((): AnyPgColumn => users.id),
 });
 
 export const usersRelations = relations(users, ({ one, many }) => ({

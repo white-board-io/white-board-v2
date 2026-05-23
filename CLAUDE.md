@@ -59,12 +59,13 @@ packages/
 
 **Route layout conventions:**
 
-| Layout route | Path | Purpose |
-|---|---|---|
-| `_public/route.tsx` | `/login`, `/signup`, `/forgot-password` | No app chrome, full-screen split-panel |
-| `_authenticated/route.tsx` | All in-app routes | Requires Session + Active Workspace |
+| Layout route               | Path                                    | Purpose                                |
+| -------------------------- | --------------------------------------- | -------------------------------------- |
+| `_public/route.tsx`        | `/login`, `/signup`, `/forgot-password` | No app chrome, full-screen split-panel |
+| `_authenticated/route.tsx` | All in-app routes                       | Requires Session + Active Workspace    |
 
 **Auth + Workspace Gate** (lives in `_authenticated/route.tsx`):
+
 1. No session → redirect `/login?redirect_url=<current-path>`
 2. Session, 0 orgs → redirect `/create-workspace`
 3. Session, 1 org, no `orgId` → auto-activate silently (new-device case)
@@ -82,6 +83,7 @@ Fastify server on port 4000. Single file: `src/server.ts`.
 ### `packages/ui` — Design System
 
 Tailwind v4 token source in `src/styles.css`. Import in any app:
+
 ```css
 @import "@repo/ui/styles.css";
 ```

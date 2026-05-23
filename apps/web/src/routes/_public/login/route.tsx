@@ -10,12 +10,7 @@ import { Button } from "@repo/ui/button";
 import { Input } from "@repo/ui/input";
 import { Label } from "@repo/ui/label";
 
-const LOGIN_BACKGROUNDS = [
-  "/images/login/1.jpg",
-  "/images/login/2.jpg",
-  "/images/login/3.jpg",
-  "/images/login/4.jpg",
-];
+const LOGIN_BACKGROUNDS = ["/images/login/1.jpg", "/images/login/2.jpg", "/images/login/3.jpg", "/images/login/4.jpg"];
 
 export const Route = createFileRoute("/_public/login")({
   validateSearch: (search: Record<string, unknown>): { redirect_url?: string } => {
@@ -149,118 +144,134 @@ function LoginPage() {
           </div>
 
           {step === "credentials" ? (
-          <>
-          {/* Form */}
-          <form onSubmit={(e) => { void handleSubmit(onSubmit)(e); }} className="space-y-4" noValidate>
-            {/* Email */}
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                autoComplete="email"
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus
-                placeholder="Enter your email"
-                {...register("email")}
-              />
-              {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
-            </div>
+            <>
+              {/* Form */}
+              <form
+                onSubmit={(e) => {
+                  void handleSubmit(onSubmit)(e);
+                }}
+                className="space-y-4"
+                noValidate
+              >
+                {/* Email */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus
+                    placeholder="Enter your email"
+                    {...register("email")}
+                  />
+                  {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+                </div>
 
-            {/* Password */}
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link to="/forgot-password" className="text-xs font-medium text-primary hover:underline">
-                  Forgot password?
+                {/* Password */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password">Password</Label>
+                    <Link to="/forgot-password" className="text-xs font-medium text-primary hover:underline">
+                      Forgot password?
+                    </Link>
+                  </div>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="current-password"
+                      placeholder="Enter your password"
+                      className="pr-10"
+                      {...register("password")}
+                    />
+                    <button
+                      type="button"
+                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      onClick={() => {
+                        setShowPassword((v) => !v);
+                      }}
+                      className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+                  {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+                </div>
+
+                {/* Form-level error */}
+                {errors.root && (
+                  <p role="alert" className="text-sm text-destructive">
+                    {errors.root.message}
+                  </p>
+                )}
+
+                <Button type="submit" disabled={isSubmitting || !isLoaded} className="w-full mt-4">
+                  {isSubmitting ? "Signing in…" : "Sign in"}
+                </Button>
+              </form>
+
+              <p className="text-center text-sm text-muted-foreground">
+                Don&apos;t have an account?{" "}
+                <Link to="/signup" className="font-semibold text-primary hover:underline">
+                  Sign up
                 </Link>
-              </div>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  placeholder="Enter your password"
-                  className="pr-10"
-                  {...register("password")}
-                />
-                <button
-                  type="button"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  onClick={() => { setShowPassword((v) => !v); }}
-                  className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
-              {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
-            </div>
-
-            {/* Form-level error */}
-            {errors.root && (
-              <p role="alert" className="text-sm text-destructive">
-                {errors.root.message}
               </p>
-            )}
-
-            <Button type="submit" disabled={isSubmitting || !isLoaded} className="w-full mt-4">
-              {isSubmitting ? "Signing in…" : "Sign in"}
-            </Button>
-          </form>
-
-          <p className="text-center text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
-            <Link to="/signup" className="font-semibold text-primary hover:underline">
-              Sign up
-            </Link>
-          </p>
-          </>
+            </>
           ) : (
-          <form onSubmit={(e) => { void codeForm.handleSubmit(onSubmitCode)(e); }} className="space-y-4" noValidate>
-            <div className="space-y-1.5">
-              <Label htmlFor="code">Verification code</Label>
-              <Input
-                id="code"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus
-                placeholder="123456"
-                className="tracking-[0.3em] placeholder:tracking-normal"
-                {...codeForm.register("code")}
-              />
-              {codeForm.formState.errors.code && (
-                <p className="text-sm text-destructive">{codeForm.formState.errors.code.message}</p>
-              )}
-            </div>
+            <form
+              onSubmit={(e) => {
+                void codeForm.handleSubmit(onSubmitCode)(e);
+              }}
+              className="space-y-4"
+              noValidate
+            >
+              <div className="space-y-1.5">
+                <Label htmlFor="code">Verification code</Label>
+                <Input
+                  id="code"
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
+                  autoFocus
+                  placeholder="123456"
+                  className="tracking-[0.3em] placeholder:tracking-normal"
+                  {...codeForm.register("code")}
+                />
+                {codeForm.formState.errors.code && (
+                  <p className="text-sm text-destructive">{codeForm.formState.errors.code.message}</p>
+                )}
+              </div>
 
-            {codeForm.formState.errors.root && (
-              <p role="alert" className="text-sm text-destructive">
-                {codeForm.formState.errors.root.message}
+              {codeForm.formState.errors.root && (
+                <p role="alert" className="text-sm text-destructive">
+                  {codeForm.formState.errors.root.message}
+                </p>
+              )}
+
+              <Button type="submit" disabled={codeForm.formState.isSubmitting || !isLoaded} className="w-full mt-4">
+                {codeForm.formState.isSubmitting ? "Verifying…" : "Verify"}
+              </Button>
+
+              <p className="text-center text-sm text-muted-foreground">
+                {resent ? (
+                  <span>Code resent. Check your inbox.</span>
+                ) : (
+                  <>
+                    Didn&apos;t get the code?{" "}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void resendCode();
+                      }}
+                      className="font-semibold text-primary hover:underline cursor-pointer"
+                    >
+                      Resend code
+                    </button>
+                  </>
+                )}
               </p>
-            )}
-
-            <Button type="submit" disabled={codeForm.formState.isSubmitting || !isLoaded} className="w-full mt-4">
-              {codeForm.formState.isSubmitting ? "Verifying…" : "Verify"}
-            </Button>
-
-            <p className="text-center text-sm text-muted-foreground">
-              {resent ? (
-                <span>Code resent. Check your inbox.</span>
-              ) : (
-                <>
-                  Didn&apos;t get the code?{" "}
-                  <button
-                    type="button"
-                    onClick={() => { void resendCode(); }}
-                    className="font-semibold text-primary hover:underline cursor-pointer"
-                  >
-                    Resend code
-                  </button>
-                </>
-              )}
-            </p>
-          </form>
+            </form>
           )}
         </div>
       </div>
