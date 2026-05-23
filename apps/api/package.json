@@ -11,9 +11,11 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@clerk/backend": "^3.4.11",
     "@clerk/fastify": "^3.1.29",
     "@fastify/cors": "^11.2.0",
-    "fastify": "5.8.5"
+    "fastify": "5.8.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "eslint": "^9.39.1",

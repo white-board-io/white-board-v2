@@ -1,33 +1,18 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { ClerkProvider, useAuth } from "@clerk/clerk-react";
+import { ClerkProvider } from "@clerk/clerk-react";
 import { ThemeProvider } from "@repo/ui/theme-provider";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
 
-// Create router instance with initial type-safe auth state context
-const router = createRouter({
-  routeTree,
-  context: {
-    auth: {
-      isSignedIn: undefined,
-      userId: undefined,
-    },
-  },
-});
+const router = createRouter({ routeTree });
 
 declare module "@tanstack/react-router" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Register {
     router: typeof router;
   }
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-function InnerApp() {
-  const auth = useAuth();
-  return <RouterProvider router={router} context={{ auth }} />;
 }
 
 // Read the Clerk Publishable Key from Vite environment variables and safely cast it
@@ -81,7 +66,7 @@ if (!PUBLISHABLE_KEY) {
     <StrictMode>
       <ThemeProvider defaultTheme="system">
         <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-          <InnerApp />
+          <RouterProvider router={router} />
         </ClerkProvider>
       </ThemeProvider>
     </StrictMode>,

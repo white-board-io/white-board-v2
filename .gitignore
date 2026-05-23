@@ -44,3 +44,4 @@ yarn-error.log*
 *.iws
 *.ipr
 atlassian-ide-plugin.xml
+.gstack/
