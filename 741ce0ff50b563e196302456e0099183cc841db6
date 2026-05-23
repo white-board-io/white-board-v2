@@ -1,0 +1,167 @@
+apps/web/src/routes/__root.tsx
+  057d5c6b775cab4a 1,4
+  7832a2a032d1b5f0 6-7
+docs/adr/0003-react-hook-form-zod-as-form-standard.md
+  1626210879af028d 1-15
+apps/web/src/routes/_authenticated/discover/route.tsx
+  a19a193f49a248be 4,7-8
+apps/web/src/routes/index.tsx
+  057d5c6b775cab4a 1-2,5,8-9,11-14,16-19
+apps/web/src/main.tsx
+  057d5c6b775cab4a 4,9,69
+apps/web/src/routes/create-workspace/route.tsx
+  85cdd512bb08d049 23
+  f5d3b635844aa557 101-104
+  dfe905e41edd456a 1,41-42,76,107-114
+  057d5c6b775cab4a 39,83-95
+  ba87e508c45d9998 17-19,49,151,156-161,168,171-178
+CONTEXT.md
+  1626210879af028d 14-25,40-46,53
+  057d5c6b775cab4a 9-12,47-52,54-57
+  7832a2a032d1b5f0 1-8,13,29,31-32,34-35,37-39
+  a19a193f49a248be 26-28,30,33,36
+turbo.json
+  057d5c6b775cab4a 4
+docs/adr/0004-route-by-active-workspace-presence.md
+  057d5c6b775cab4a 1-35
+apps/web/src/routes/_public/signup/route.tsx
+  f5d3b635844aa557 3
+  057d5c6b775cab4a 1-2,39,74-75,94-107
+docs/adr/0002-backend-owned-workspace-creation.md
+  1626210879af028d 1-21
+apps/web/src/routes/select-workspace/route.tsx
+  057d5c6b775cab4a 1-128
+apps/web/src/lib/clerk-errors.ts
+  1626210879af028d 1-26
+docs/adr/0001-custom-auth-form-over-clerk-prebuilt-ui.md
+  7832a2a032d1b5f0 1-18,21-23
+  1626210879af028d 19-20
+apps/api/src/server.ts
+  85cdd512bb08d049 5-25,105-108,111,114-120,124
+  057d5c6b775cab4a 4,83-100
+  1626210879af028d 3,81-82,101-104,109-110,112-113,121-123,125-132
+apps/web/src/routes/_public/forgot-password/route.tsx
+  057d5c6b775cab4a 1-2,37,69,78-90
+apps/api/package.json
+  85cdd512bb08d049 17-18
+  057d5c6b775cab4a 14
+apps/web/src/routes/_public/login/route.tsx
+  f5d3b635844aa557 3
+  057d5c6b775cab4a 1-2,35-40,43,52-53,62-71,77-82,86-109,113-126,142-147,151-152,217-264
+apps/web/src/routes/_authenticated/route.tsx
+  f5d3b635844aa557 6-7,9,44-45,47
+  a19a193f49a248be 66
+  dfe905e41edd456a 38,46
+  057d5c6b775cab4a 1,3,10-11,13-37,48-59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "741ce0ff50b563e196302456e0099183cc841db6",
+  "prompts": {
+    "057d5c6b775cab4a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "38116b2a-5279-4bdf-b4cf-e0193d0cbb1c",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 471,
+      "total_deletions": 129,
+      "accepted_lines": 433,
+      "overriden_lines": 0
+    },
+    "1626210879af028d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1eebc07d-4fa1-4203-8e80-d83cde25d176",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 989,
+      "total_deletions": 54,
+      "accepted_lines": 834,
+      "overriden_lines": 0
+    },
+    "7832a2a032d1b5f0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "64ff51fc-24ad-4a60-884c-36a12cd824a0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 330,
+      "total_deletions": 185,
+      "accepted_lines": 154,
+      "overriden_lines": 0
+    },
+    "85cdd512bb08d049": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "671a625a-ba36-4b4c-95a2-76dc766203ac",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 37,
+      "total_deletions": 61,
+      "accepted_lines": 37,
+      "overriden_lines": 0
+    },
+    "a19a193f49a248be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7565fd4c-a787-48a4-baa3-bf296d5d8e30",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 76,
+      "total_deletions": 292,
+      "accepted_lines": 69,
+      "overriden_lines": 0
+    },
+    "ba87e508c45d9998": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17696da3-f74d-42a6-8fcb-8e43a8594d18",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 25,
+      "total_deletions": 15,
+      "accepted_lines": 20,
+      "overriden_lines": 0
+    },
+    "dfe905e41edd456a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b376e06d-4556-4906-a3a3-dce4c5eefbbe",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 17,
+      "total_deletions": 9,
+      "accepted_lines": 14,
+      "overriden_lines": 0
+    },
+    "f5d3b635844aa557": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cedffe25-31a1-4c32-aecb-1a6338170930",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 54,
+      "total_deletions": 80,
+      "accepted_lines": 13,
+      "overriden_lines": 0
+    }
+  }
+}
