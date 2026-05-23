@@ -1,0 +1,54 @@
+apps/web/src/components/app-sidebar.tsx
+  2e3d7a4043974ad7 103,159,204-208
+  9b77fd5357c95e4f 1-102,104-158,160-203,209-238,240-275
+CLAUDE.md
+  598ab0bc945ac7a0 1-106
+apps/web/src/routes/_authenticated/route.tsx
+  9b77fd5357c95e4f 3-5,14,27-31,68-70,72-73,75-78,80-85,87-91,94,96-97,99-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "c68547db343c6436267424eba2d1a12ebd12eb09",
+  "prompts": {
+    "2e3d7a4043974ad7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e53c6-4005-71f2-9e7d-50d624664fbf",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 3,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    },
+    "598ab0bc945ac7a0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0afff533-9b04-4412-ad4a-b68e4a03a436",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 106,
+      "total_deletions": 0,
+      "accepted_lines": 106,
+      "overriden_lines": 0
+    },
+    "9b77fd5357c95e4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "863b4883-a090-49bb-9757-ad7de229ec8b",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 317,
+      "total_deletions": 20,
+      "accepted_lines": 305,
+      "overriden_lines": 3
+    }
+  }
+}
