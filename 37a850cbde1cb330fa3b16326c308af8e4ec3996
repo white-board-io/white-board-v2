@@ -1,0 +1,25 @@
+apps/api/.env.example
+  503f29016000c8b8 2-3
+apps/web/.env.example
+  503f29016000c8b8 2-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "37a850cbde1cb330fa3b16326c308af8e4ec3996",
+  "prompts": {
+    "503f29016000c8b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3e4d1193-71d6-4768-ad43-a59b48f630a6",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 3,
+      "accepted_lines": 6,
+      "overriden_lines": 0
+    }
+  }
+}
