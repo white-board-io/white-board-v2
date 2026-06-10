@@ -1,0 +1,211 @@
+apps/web/src/routes/_authenticated/academics/sections/new/route.tsx
+  503f29016000c8b8 1-146
+apps/api/src/modules/school/application/commands/create-student.ts
+  503f29016000c8b8 1-26
+apps/api/src/modules/school/CONTEXT.md
+  503f29016000c8b8 1-87
+packages/contracts/tsconfig.json
+  503f29016000c8b8 1-12
+apps/web/src/features/academic-years/api.ts
+  503f29016000c8b8 1-26
+packages/contracts/src/school/class-section.ts
+  503f29016000c8b8 1-27
+packages/db/tsconfig.json
+  503f29016000c8b8 1-12
+packages/contracts/src/school/enrolment.ts
+  503f29016000c8b8 1-47
+apps/web/src/routes/_authenticated/people/students/new/route.tsx
+  503f29016000c8b8 1-67
+apps/api/src/modules/school/infrastructure/drizzle-class-section-lookup.ts
+  503f29016000c8b8 1-24
+apps/api/package.json
+  503f29016000c8b8 17-18,20
+apps/web/src/routes/_authenticated/$.tsx
+  503f29016000c8b8 1-6
+apps/api/src/modules/school/domain/student/student-repository.ts
+  503f29016000c8b8 1-7
+docker-compose.yml
+  503f29016000c8b8 1-21
+CONTEXT.md
+  503f29016000c8b8 1-6,52-54
+apps/web/src/components/app-header.tsx
+  503f29016000c8b8 1-23
+apps/api/src/modules/school/routes.ts
+  503f29016000c8b8 1-175
+packages/db/.env.example
+  503f29016000c8b8 1-2
+apps/api/src/modules/school/domain/shared/domain-event.ts
+  503f29016000c8b8 1-10
+apps/api/src/server.ts
+  503f29016000c8b8 6,41-43
+packages/contracts/src/school/academic-year.ts
+  503f29016000c8b8 1-24
+apps/web/src/components/app-sidebar.tsx
+  503f29016000c8b8 12-14,50,52-55
+apps/api/.env.example
+  503f29016000c8b8 4-6
+apps/web/src/main.tsx
+  503f29016000c8b8 5,11,71-73
+apps/web/src/routes/_authenticated/academics/classes/index.tsx
+  503f29016000c8b8 1-59
+apps/web/src/routes/_authenticated/academics/sections/index.tsx
+  503f29016000c8b8 1-86
+apps/web/src/routes/_authenticated/academics/classes/new/route.tsx
+  503f29016000c8b8 1-64
+apps/api/src/modules/school/infrastructure/setup-store.ts
+  503f29016000c8b8 1-154
+apps/api/CLAUDE.md
+  503f29016000c8b8 22,112-134
+apps/api/src/modules/school/infrastructure/drizzle-student-repository.ts
+  503f29016000c8b8 1-59
+packages/contracts/src/school/index.ts
+  503f29016000c8b8 1-6
+packages/db/src/schema/school/student-enrolments.ts
+  503f29016000c8b8 1-54
+apps/api/src/modules/school/domain/student/student.ts
+  503f29016000c8b8 1-85
+apps/api/src/modules/school/infrastructure/drizzle-enrolment-repository.ts
+  503f29016000c8b8 1-106
+packages/contracts/eslint.config.js
+  503f29016000c8b8 1-4
+apps/api/src/modules/school/application/ports.ts
+  503f29016000c8b8 1-10
+docs/requirements/class-section-student-model.md
+  503f29016000c8b8 5,65,334,336-364
+docs/adr/0006-ddd-cqs-lite-modular-monolith.md
+  503f29016000c8b8 1-30
+apps/api/src/modules/school/application/commands/enroll-student.ts
+  503f29016000c8b8 1-61
+packages/contracts/src/school/student.ts
+  503f29016000c8b8 1-28
+packages/contracts/src/index.ts
+  503f29016000c8b8 1
+packages/db/src/schema/school/class-sections.ts
+  503f29016000c8b8 1-45
+apps/web/src/features/streams/api.ts
+  503f29016000c8b8 1-26
+apps/api/src/modules/school/application/commands/promote-student.ts
+  503f29016000c8b8 1-52
+apps/web/src/routes/_authenticated/academics/sections/$sectionId/route.tsx
+  503f29016000c8b8 1-81
+CONTEXT-MAP.md
+  503f29016000c8b8 1-49
+packages/db/src/schema/school/academic-years.ts
+  503f29016000c8b8 1-31
+docs/adr/0005-drizzle-postgres-js-driver.md
+  503f29016000c8b8 1-12
+packages/contracts/package.json
+  503f29016000c8b8 1-22
+packages/db/src/schema/index.ts
+  503f29016000c8b8 1
+apps/web/src/components/states.tsx
+  503f29016000c8b8 1-40
+apps/web/src/routes/_authenticated/academics/academic-years/new/route.tsx
+  503f29016000c8b8 1-65
+apps/api/src/modules/school/domain/shared/errors.ts
+  503f29016000c8b8 1-30
+apps/web/src/routes/_authenticated/academics/academic-years/index.tsx
+  503f29016000c8b8 1-62
+apps/web/src/routes/_authenticated/academics/streams/index.tsx
+  503f29016000c8b8 1-61
+packages/db/src/schema/school/streams.ts
+  503f29016000c8b8 1-23
+packages/contracts/src/school/grade-level.ts
+  503f29016000c8b8 1-20
+apps/api/src/modules/school/domain/student/events.ts
+  503f29016000c8b8 1-7
+apps/api/src/modules/school/infrastructure/queries.ts
+  503f29016000c8b8 1-89
+apps/api/src/modules/school/dto.ts
+  503f29016000c8b8 1-56
+apps/web/src/components/year-switcher.tsx
+  503f29016000c8b8 1-36
+packages/contracts/src/school/stream.ts
+  503f29016000c8b8 1-18
+apps/web/src/routes/_authenticated/people/students/$studentId/route.tsx
+  503f29016000c8b8 1-297
+packages/db/src/index.ts
+  503f29016000c8b8 1-6
+packages/db/package.json
+  503f29016000c8b8 1-22,24-25,31-32
+packages/db/drizzle.config.ts
+  503f29016000c8b8 1-10
+packages/contracts/src/common.ts
+  503f29016000c8b8 1-6
+apps/web/src/lib/api-client.ts
+  503f29016000c8b8 1-53
+apps/web/src/features/class-sections/api.ts
+  503f29016000c8b8 1-36
+README.md
+  503f29016000c8b8 1,3-6,8,10-16,18,20,22-24,26,29,32,34-38,40,43-44,47,50-52,55,58-60,62-65,68,70-75
+apps/api/src/modules/school/domain/enrolment/events.ts
+  503f29016000c8b8 1-13
+turbo.json
+  503f29016000c8b8 4
+apps/web/package.json
+  503f29016000c8b8 16
+apps/web/src/features/students/api.ts
+  503f29016000c8b8 1-64
+apps/web/src/routes/_authenticated/academics/streams/new/route.tsx
+  503f29016000c8b8 1-61
+packages/db/src/schema/school/grade-levels.ts
+  503f29016000c8b8 1-24
+apps/web/src/features/grade-levels/api.ts
+  503f29016000c8b8 1-26
+apps/web/src/components/page-header.tsx
+  503f29016000c8b8 1-21
+packages/db/src/schema/school/index.ts
+  503f29016000c8b8 1-6
+apps/api/src/modules/school/domain/enrolment/enrolment-repository.ts
+  503f29016000c8b8 1-9
+apps/api/src/modules/school/domain/enrolment/enrolment.ts
+  503f29016000c8b8 1-95
+apps/web/src/routes/_authenticated/route.tsx
+  503f29016000c8b8 1,3-5,7,17-19,30-38,102-106
+apps/web/src/store/academic-year.ts
+  503f29016000c8b8 1-14
+apps/api/src/modules/school/infrastructure/errors.ts
+  503f29016000c8b8 1-45
+packages/db/src/schema/_helpers.ts
+  503f29016000c8b8 1-26
+docs/adr/0008-shared-contracts-package.md
+  503f29016000c8b8 1-28
+docs/adr/0007-isolated-vertical-contexts.md
+  503f29016000c8b8 1-30
+apps/api/src/modules/school/domain/shared/util.ts
+  503f29016000c8b8 1-17
+apps/web/src/components/coming-soon.tsx
+  503f29016000c8b8 1-17
+apps/web/src/routes/_authenticated/people/students/index.tsx
+  503f29016000c8b8 1-67
+CLAUDE.md
+  503f29016000c8b8 32-37,47,51-53,55-58,67-71,90,94-97,99-110,124-125,140-143
+packages/db/src/schema/school/students.ts
+  503f29016000c8b8 1-32
+packages/db/src/client.ts
+  503f29016000c8b8 1-16
+packages/db/eslint.config.js
+  503f29016000c8b8 1-4
+apps/web/src/components/field.tsx
+  503f29016000c8b8 1-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "7d676a89263c96a41a9e2aba76e849accdddbca9",
+  "prompts": {
+    "503f29016000c8b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3e4d1193-71d6-4768-ad43-a59b48f630a6",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Arun Selva Kumar <arun@joinassembly.com>",
+      "messages": [],
+      "total_additions": 3729,
+      "total_deletions": 257,
+      "accepted_lines": 3650,
+      "overriden_lines": 0
+    }
+  }
+}
