@@ -14,10 +14,23 @@ import { Route as CreateWorkspaceRouteRouteImport } from './routes/create-worksp
 import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedSplatRouteImport } from './routes/_authenticated/$'
 import { Route as PublicSignupRouteRouteImport } from './routes/_public/signup/route'
 import { Route as PublicLoginRouteRouteImport } from './routes/_public/login/route'
 import { Route as PublicForgotPasswordRouteRouteImport } from './routes/_public/forgot-password/route'
 import { Route as AuthenticatedDiscoverRouteRouteImport } from './routes/_authenticated/discover/route'
+import { Route as AuthenticatedPeopleStudentsIndexRouteImport } from './routes/_authenticated/people/students/index'
+import { Route as AuthenticatedAcademicsStreamsIndexRouteImport } from './routes/_authenticated/academics/streams/index'
+import { Route as AuthenticatedAcademicsSectionsIndexRouteImport } from './routes/_authenticated/academics/sections/index'
+import { Route as AuthenticatedAcademicsClassesIndexRouteImport } from './routes/_authenticated/academics/classes/index'
+import { Route as AuthenticatedAcademicsAcademicYearsIndexRouteImport } from './routes/_authenticated/academics/academic-years/index'
+import { Route as AuthenticatedPeopleStudentsNewRouteRouteImport } from './routes/_authenticated/people/students/new/route'
+import { Route as AuthenticatedPeopleStudentsStudentIdRouteRouteImport } from './routes/_authenticated/people/students/$studentId/route'
+import { Route as AuthenticatedAcademicsStreamsNewRouteRouteImport } from './routes/_authenticated/academics/streams/new/route'
+import { Route as AuthenticatedAcademicsSectionsNewRouteRouteImport } from './routes/_authenticated/academics/sections/new/route'
+import { Route as AuthenticatedAcademicsSectionsSectionIdRouteRouteImport } from './routes/_authenticated/academics/sections/$sectionId/route'
+import { Route as AuthenticatedAcademicsClassesNewRouteRouteImport } from './routes/_authenticated/academics/classes/new/route'
+import { Route as AuthenticatedAcademicsAcademicYearsNewRouteRouteImport } from './routes/_authenticated/academics/academic-years/new/route'
 
 const SelectWorkspaceRouteRoute = SelectWorkspaceRouteRouteImport.update({
   id: '/select-workspace',
@@ -42,6 +55,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSplatRoute = AuthenticatedSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const PublicSignupRouteRoute = PublicSignupRouteRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -64,6 +82,78 @@ const AuthenticatedDiscoverRouteRoute =
     path: '/discover',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPeopleStudentsIndexRoute =
+  AuthenticatedPeopleStudentsIndexRouteImport.update({
+    id: '/people/students/',
+    path: '/people/students/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsStreamsIndexRoute =
+  AuthenticatedAcademicsStreamsIndexRouteImport.update({
+    id: '/academics/streams/',
+    path: '/academics/streams/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsSectionsIndexRoute =
+  AuthenticatedAcademicsSectionsIndexRouteImport.update({
+    id: '/academics/sections/',
+    path: '/academics/sections/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsClassesIndexRoute =
+  AuthenticatedAcademicsClassesIndexRouteImport.update({
+    id: '/academics/classes/',
+    path: '/academics/classes/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsAcademicYearsIndexRoute =
+  AuthenticatedAcademicsAcademicYearsIndexRouteImport.update({
+    id: '/academics/academic-years/',
+    path: '/academics/academic-years/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPeopleStudentsNewRouteRoute =
+  AuthenticatedPeopleStudentsNewRouteRouteImport.update({
+    id: '/people/students/new',
+    path: '/people/students/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPeopleStudentsStudentIdRouteRoute =
+  AuthenticatedPeopleStudentsStudentIdRouteRouteImport.update({
+    id: '/people/students/$studentId',
+    path: '/people/students/$studentId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsStreamsNewRouteRoute =
+  AuthenticatedAcademicsStreamsNewRouteRouteImport.update({
+    id: '/academics/streams/new',
+    path: '/academics/streams/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsSectionsNewRouteRoute =
+  AuthenticatedAcademicsSectionsNewRouteRouteImport.update({
+    id: '/academics/sections/new',
+    path: '/academics/sections/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsSectionsSectionIdRouteRoute =
+  AuthenticatedAcademicsSectionsSectionIdRouteRouteImport.update({
+    id: '/academics/sections/$sectionId',
+    path: '/academics/sections/$sectionId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsClassesNewRouteRoute =
+  AuthenticatedAcademicsClassesNewRouteRouteImport.update({
+    id: '/academics/classes/new',
+    path: '/academics/classes/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAcademicsAcademicYearsNewRouteRoute =
+  AuthenticatedAcademicsAcademicYearsNewRouteRouteImport.update({
+    id: '/academics/academic-years/new',
+    path: '/academics/academic-years/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -73,6 +163,19 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof PublicForgotPasswordRouteRoute
   '/login': typeof PublicLoginRouteRoute
   '/signup': typeof PublicSignupRouteRoute
+  '/$': typeof AuthenticatedSplatRoute
+  '/academics/academic-years/new': typeof AuthenticatedAcademicsAcademicYearsNewRouteRoute
+  '/academics/classes/new': typeof AuthenticatedAcademicsClassesNewRouteRoute
+  '/academics/sections/$sectionId': typeof AuthenticatedAcademicsSectionsSectionIdRouteRoute
+  '/academics/sections/new': typeof AuthenticatedAcademicsSectionsNewRouteRoute
+  '/academics/streams/new': typeof AuthenticatedAcademicsStreamsNewRouteRoute
+  '/people/students/$studentId': typeof AuthenticatedPeopleStudentsStudentIdRouteRoute
+  '/people/students/new': typeof AuthenticatedPeopleStudentsNewRouteRoute
+  '/academics/academic-years/': typeof AuthenticatedAcademicsAcademicYearsIndexRoute
+  '/academics/classes/': typeof AuthenticatedAcademicsClassesIndexRoute
+  '/academics/sections/': typeof AuthenticatedAcademicsSectionsIndexRoute
+  '/academics/streams/': typeof AuthenticatedAcademicsStreamsIndexRoute
+  '/people/students/': typeof AuthenticatedPeopleStudentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,6 +185,19 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof PublicForgotPasswordRouteRoute
   '/login': typeof PublicLoginRouteRoute
   '/signup': typeof PublicSignupRouteRoute
+  '/$': typeof AuthenticatedSplatRoute
+  '/academics/academic-years/new': typeof AuthenticatedAcademicsAcademicYearsNewRouteRoute
+  '/academics/classes/new': typeof AuthenticatedAcademicsClassesNewRouteRoute
+  '/academics/sections/$sectionId': typeof AuthenticatedAcademicsSectionsSectionIdRouteRoute
+  '/academics/sections/new': typeof AuthenticatedAcademicsSectionsNewRouteRoute
+  '/academics/streams/new': typeof AuthenticatedAcademicsStreamsNewRouteRoute
+  '/people/students/$studentId': typeof AuthenticatedPeopleStudentsStudentIdRouteRoute
+  '/people/students/new': typeof AuthenticatedPeopleStudentsNewRouteRoute
+  '/academics/academic-years': typeof AuthenticatedAcademicsAcademicYearsIndexRoute
+  '/academics/classes': typeof AuthenticatedAcademicsClassesIndexRoute
+  '/academics/sections': typeof AuthenticatedAcademicsSectionsIndexRoute
+  '/academics/streams': typeof AuthenticatedAcademicsStreamsIndexRoute
+  '/people/students': typeof AuthenticatedPeopleStudentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,6 +210,19 @@ export interface FileRoutesById {
   '/_public/forgot-password': typeof PublicForgotPasswordRouteRoute
   '/_public/login': typeof PublicLoginRouteRoute
   '/_public/signup': typeof PublicSignupRouteRoute
+  '/_authenticated/$': typeof AuthenticatedSplatRoute
+  '/_authenticated/academics/academic-years/new': typeof AuthenticatedAcademicsAcademicYearsNewRouteRoute
+  '/_authenticated/academics/classes/new': typeof AuthenticatedAcademicsClassesNewRouteRoute
+  '/_authenticated/academics/sections/$sectionId': typeof AuthenticatedAcademicsSectionsSectionIdRouteRoute
+  '/_authenticated/academics/sections/new': typeof AuthenticatedAcademicsSectionsNewRouteRoute
+  '/_authenticated/academics/streams/new': typeof AuthenticatedAcademicsStreamsNewRouteRoute
+  '/_authenticated/people/students/$studentId': typeof AuthenticatedPeopleStudentsStudentIdRouteRoute
+  '/_authenticated/people/students/new': typeof AuthenticatedPeopleStudentsNewRouteRoute
+  '/_authenticated/academics/academic-years/': typeof AuthenticatedAcademicsAcademicYearsIndexRoute
+  '/_authenticated/academics/classes/': typeof AuthenticatedAcademicsClassesIndexRoute
+  '/_authenticated/academics/sections/': typeof AuthenticatedAcademicsSectionsIndexRoute
+  '/_authenticated/academics/streams/': typeof AuthenticatedAcademicsStreamsIndexRoute
+  '/_authenticated/people/students/': typeof AuthenticatedPeopleStudentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,6 +234,19 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/$'
+    | '/academics/academic-years/new'
+    | '/academics/classes/new'
+    | '/academics/sections/$sectionId'
+    | '/academics/sections/new'
+    | '/academics/streams/new'
+    | '/people/students/$studentId'
+    | '/people/students/new'
+    | '/academics/academic-years/'
+    | '/academics/classes/'
+    | '/academics/sections/'
+    | '/academics/streams/'
+    | '/people/students/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -114,6 +256,19 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/$'
+    | '/academics/academic-years/new'
+    | '/academics/classes/new'
+    | '/academics/sections/$sectionId'
+    | '/academics/sections/new'
+    | '/academics/streams/new'
+    | '/people/students/$studentId'
+    | '/people/students/new'
+    | '/academics/academic-years'
+    | '/academics/classes'
+    | '/academics/sections'
+    | '/academics/streams'
+    | '/people/students'
   id:
     | '__root__'
     | '/'
@@ -125,6 +280,19 @@ export interface FileRouteTypes {
     | '/_public/forgot-password'
     | '/_public/login'
     | '/_public/signup'
+    | '/_authenticated/$'
+    | '/_authenticated/academics/academic-years/new'
+    | '/_authenticated/academics/classes/new'
+    | '/_authenticated/academics/sections/$sectionId'
+    | '/_authenticated/academics/sections/new'
+    | '/_authenticated/academics/streams/new'
+    | '/_authenticated/people/students/$studentId'
+    | '/_authenticated/people/students/new'
+    | '/_authenticated/academics/academic-years/'
+    | '/_authenticated/academics/classes/'
+    | '/_authenticated/academics/sections/'
+    | '/_authenticated/academics/streams/'
+    | '/_authenticated/people/students/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -172,6 +340,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/$': {
+      id: '/_authenticated/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof AuthenticatedSplatRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_public/signup': {
       id: '/_public/signup'
       path: '/signup'
@@ -200,15 +375,136 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDiscoverRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/people/students/': {
+      id: '/_authenticated/people/students/'
+      path: '/people/students'
+      fullPath: '/people/students/'
+      preLoaderRoute: typeof AuthenticatedPeopleStudentsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/streams/': {
+      id: '/_authenticated/academics/streams/'
+      path: '/academics/streams'
+      fullPath: '/academics/streams/'
+      preLoaderRoute: typeof AuthenticatedAcademicsStreamsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/sections/': {
+      id: '/_authenticated/academics/sections/'
+      path: '/academics/sections'
+      fullPath: '/academics/sections/'
+      preLoaderRoute: typeof AuthenticatedAcademicsSectionsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/classes/': {
+      id: '/_authenticated/academics/classes/'
+      path: '/academics/classes'
+      fullPath: '/academics/classes/'
+      preLoaderRoute: typeof AuthenticatedAcademicsClassesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/academic-years/': {
+      id: '/_authenticated/academics/academic-years/'
+      path: '/academics/academic-years'
+      fullPath: '/academics/academic-years/'
+      preLoaderRoute: typeof AuthenticatedAcademicsAcademicYearsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/people/students/new': {
+      id: '/_authenticated/people/students/new'
+      path: '/people/students/new'
+      fullPath: '/people/students/new'
+      preLoaderRoute: typeof AuthenticatedPeopleStudentsNewRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/people/students/$studentId': {
+      id: '/_authenticated/people/students/$studentId'
+      path: '/people/students/$studentId'
+      fullPath: '/people/students/$studentId'
+      preLoaderRoute: typeof AuthenticatedPeopleStudentsStudentIdRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/streams/new': {
+      id: '/_authenticated/academics/streams/new'
+      path: '/academics/streams/new'
+      fullPath: '/academics/streams/new'
+      preLoaderRoute: typeof AuthenticatedAcademicsStreamsNewRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/sections/new': {
+      id: '/_authenticated/academics/sections/new'
+      path: '/academics/sections/new'
+      fullPath: '/academics/sections/new'
+      preLoaderRoute: typeof AuthenticatedAcademicsSectionsNewRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/sections/$sectionId': {
+      id: '/_authenticated/academics/sections/$sectionId'
+      path: '/academics/sections/$sectionId'
+      fullPath: '/academics/sections/$sectionId'
+      preLoaderRoute: typeof AuthenticatedAcademicsSectionsSectionIdRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/classes/new': {
+      id: '/_authenticated/academics/classes/new'
+      path: '/academics/classes/new'
+      fullPath: '/academics/classes/new'
+      preLoaderRoute: typeof AuthenticatedAcademicsClassesNewRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/academics/academic-years/new': {
+      id: '/_authenticated/academics/academic-years/new'
+      path: '/academics/academic-years/new'
+      fullPath: '/academics/academic-years/new'
+      preLoaderRoute: typeof AuthenticatedAcademicsAcademicYearsNewRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDiscoverRouteRoute: typeof AuthenticatedDiscoverRouteRoute
+  AuthenticatedSplatRoute: typeof AuthenticatedSplatRoute
+  AuthenticatedAcademicsAcademicYearsNewRouteRoute: typeof AuthenticatedAcademicsAcademicYearsNewRouteRoute
+  AuthenticatedAcademicsClassesNewRouteRoute: typeof AuthenticatedAcademicsClassesNewRouteRoute
+  AuthenticatedAcademicsSectionsSectionIdRouteRoute: typeof AuthenticatedAcademicsSectionsSectionIdRouteRoute
+  AuthenticatedAcademicsSectionsNewRouteRoute: typeof AuthenticatedAcademicsSectionsNewRouteRoute
+  AuthenticatedAcademicsStreamsNewRouteRoute: typeof AuthenticatedAcademicsStreamsNewRouteRoute
+  AuthenticatedPeopleStudentsStudentIdRouteRoute: typeof AuthenticatedPeopleStudentsStudentIdRouteRoute
+  AuthenticatedPeopleStudentsNewRouteRoute: typeof AuthenticatedPeopleStudentsNewRouteRoute
+  AuthenticatedAcademicsAcademicYearsIndexRoute: typeof AuthenticatedAcademicsAcademicYearsIndexRoute
+  AuthenticatedAcademicsClassesIndexRoute: typeof AuthenticatedAcademicsClassesIndexRoute
+  AuthenticatedAcademicsSectionsIndexRoute: typeof AuthenticatedAcademicsSectionsIndexRoute
+  AuthenticatedAcademicsStreamsIndexRoute: typeof AuthenticatedAcademicsStreamsIndexRoute
+  AuthenticatedPeopleStudentsIndexRoute: typeof AuthenticatedPeopleStudentsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDiscoverRouteRoute: AuthenticatedDiscoverRouteRoute,
+  AuthenticatedSplatRoute: AuthenticatedSplatRoute,
+  AuthenticatedAcademicsAcademicYearsNewRouteRoute:
+    AuthenticatedAcademicsAcademicYearsNewRouteRoute,
+  AuthenticatedAcademicsClassesNewRouteRoute:
+    AuthenticatedAcademicsClassesNewRouteRoute,
+  AuthenticatedAcademicsSectionsSectionIdRouteRoute:
+    AuthenticatedAcademicsSectionsSectionIdRouteRoute,
+  AuthenticatedAcademicsSectionsNewRouteRoute:
+    AuthenticatedAcademicsSectionsNewRouteRoute,
+  AuthenticatedAcademicsStreamsNewRouteRoute:
+    AuthenticatedAcademicsStreamsNewRouteRoute,
+  AuthenticatedPeopleStudentsStudentIdRouteRoute:
+    AuthenticatedPeopleStudentsStudentIdRouteRoute,
+  AuthenticatedPeopleStudentsNewRouteRoute:
+    AuthenticatedPeopleStudentsNewRouteRoute,
+  AuthenticatedAcademicsAcademicYearsIndexRoute:
+    AuthenticatedAcademicsAcademicYearsIndexRoute,
+  AuthenticatedAcademicsClassesIndexRoute:
+    AuthenticatedAcademicsClassesIndexRoute,
+  AuthenticatedAcademicsSectionsIndexRoute:
+    AuthenticatedAcademicsSectionsIndexRoute,
+  AuthenticatedAcademicsStreamsIndexRoute:
+    AuthenticatedAcademicsStreamsIndexRoute,
+  AuthenticatedPeopleStudentsIndexRoute: AuthenticatedPeopleStudentsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

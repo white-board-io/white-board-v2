@@ -3,6 +3,7 @@ import cors from "@fastify/cors";
 import { clerkPlugin, getAuth, clerkClient } from "@clerk/fastify";
 import { verifyToken } from "@clerk/backend";
 import { z } from "zod";
+import { schoolRoutes } from "./modules/school/routes";
 
 const MAX_WORKSPACES_PER_USER = 49;
 
@@ -36,6 +37,9 @@ const startServer = async () => {
 
   // 2. Register Clerk authentication plugin globally
   await fastify.register(clerkPlugin);
+
+  // 2b. School module (DDD + CQS-lite): academic years, classes, sections, students, enrolments
+  await fastify.register(schoolRoutes);
 
   // Public Home Route
   fastify.get("/", async () => {

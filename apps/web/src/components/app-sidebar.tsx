@@ -9,8 +9,9 @@ import {
   Megaphone,
   Calendar,
   BookOpen,
-  BookMarked,
-  Clock,
+  Layers,
+  LayoutGrid,
+  CalendarRange,
   Users,
   GraduationCap,
   UserCheck,
@@ -46,11 +47,12 @@ const NAV: NavSection[] = [
     ],
   },
   {
-    title: "Workspace",
+    title: "Academics",
     items: [
-      { label: "Classes", icon: BookOpen, href: "/workspace/classes" },
-      { label: "Subjects", icon: BookMarked, href: "/workspace/subjects" },
-      { label: "Timetable", icon: Clock, href: "/workspace/timetable" },
+      { label: "Academic Years", icon: CalendarRange, href: "/academics/academic-years" },
+      { label: "Classes", icon: BookOpen, href: "/academics/classes" },
+      { label: "Streams", icon: Layers, href: "/academics/streams" },
+      { label: "Sections", icon: LayoutGrid, href: "/academics/sections" },
     ],
   },
   {

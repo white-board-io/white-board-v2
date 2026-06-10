@@ -1,4 +1,9 @@
-# Context
+# Platform / Access & Tenancy
+
+The shared identity, authentication, and multi-tenancy layer that every vertical
+context (School, Training Institute, Online Institute) operates inside. Owns
+Users, Sessions, and Workspaces. See [CONTEXT-MAP.md](./CONTEXT-MAP.md) for how
+this relates to the domain contexts.
 
 ## Glossary
 
@@ -43,6 +48,9 @@ The tenant boundary of the product — the educational institution a User belong
 
 **Workspace Type**
 The category of educational institution a Workspace represents. One of a fixed set: School, Training Institute, Online Institute. Chosen at Workspace creation.
+
+**Workspace Board**
+The single examination board a school Workspace follows (e.g. CBSE, State, ICSE). A Workspace attribute stored alongside Workspace Type and address (Clerk `publicMetadata`), not a domain entity. Domain structures (grade levels, sections) do not vary by board in the MVP, and a Workspace has at most one board.
 
 **Active Workspace**
 The single Workspace currently in effect for a Session, carried as `orgId` in the Session JWT. A User may belong to many Workspaces but has at most one Active Workspace at a time. Clerk persists the last Active Workspace on the client across logins, so a returning User normally resumes with the same one.

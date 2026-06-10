@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft
+Agreed — decisions recorded 2026-06-08 (see [Resolved Decisions](#resolved-decisions-2026-06-08)). Architecture context: [CONTEXT-MAP.md](../../CONTEXT-MAP.md), [School glossary](../../apps/api/src/modules/school/CONTEXT.md), [ADR-0005](../adr/0005-drizzle-postgres-js-driver.md).
 
 ## Purpose
 
@@ -62,7 +62,7 @@ The record that places a Student into one Class Section for one Academic Year. A
 3. A Class Section always belongs to one Academic Year and one Grade Level.
 4. A Student may exist without an active enrolment, but should not appear in class lists until enrolled.
 5. A Student should have at most one active enrolment per Academic Year.
-6. Promotion must not overwrite old enrolments. Promotion creates a new enrolment for the next Academic Year.
+6. Promotion must not overwrite the old enrolment's placement. Promotion closes the current enrolment (status `active` → `promoted`) and creates a new `active` enrolment for the next Academic Year. Transfer and repeat use the same close-old/open-new mechanic; leaving only closes. A Student has exactly one `active` enrolment at a time.
 7. Historical class membership must remain available after promotion.
 8. The UI may display `Class 5 - A`, but the database should store grade level and section separately.
 
@@ -331,10 +331,34 @@ The old enrolment remains unchanged. The new enrolment records the new class pla
 8. Admin can view students by Class Section.
 9. Student class history is preserved across academic years.
 
-## Open Questions
+## Resolved Decisions (2026-06-08)
 
-1. Should `last_name` be required for all students, or should the system support single-name students from day one?
-2. Should admission number be added now, even if other student profile fields are deferred?
-3. Should roll number be required during enrolment or optional until class lists are finalized?
-4. Should the first version support multiple boards within one Workspace, such as CBSE and State Board running together?
-5. Should Class 11 and Class 12 require stream/group fields in MVP, or can that wait until subject setup?
+These are authoritative and supersede any conflicting field notes in the draft body above.
+
+### Answers to the former open questions
+
+1. **`last_name` is optional.** Required: `first_name`, `date_of_birth`. Optional: `middle_name`, `last_name`. Single-name students are supported.
+2. **Admission number is added now — optional, unique when present.** `students.admission_number` is nullable with `UNIQUE (workspace_id, admission_number) WHERE admission_number IS NOT NULL`.
+3. **Roll number is optional.** `student_enrolments.roll_number` is nullable with `UNIQUE (class_section_id, roll_number) WHERE roll_number IS NOT NULL`.
+4. **Boards are not a School concept.** A single board per school is recorded as a Workspace attribute in the Platform context (Clerk `publicMetadata`), not in the School schema. Within-Workspace multi-board is out of scope.
+5. **Stream is first-class and configurable** (reversing the original "defer"). A new per-Workspace `streams` lookup table; `class_sections` references it. See schema deltas.
+
+### Schema deltas over the draft
+
+- **New `streams` table** (mirrors `grade_levels`): `id, workspace_id, name, sort_order, status, created_at, updated_at`, with `UNIQUE (workspace_id, name)`.
+- **`class_sections`**: add `stream_id` (nullable FK → `streams`). Natural key becomes `UNIQUE (workspace_id, academic_year_id, grade_level_id, stream_id, section_name) NULLS NOT DISTINCT` — primary-grade sections with a null stream still cannot duplicate.
+- **`students`**: `last_name` is nullable; add nullable `admission_number` (unique when present, per Workspace).
+- **`student_enrolments`**: exactly one `active` row per Student at a time; `UNIQUE (student_id, academic_year_id) WHERE status = 'active'` is the atomic backstop for the per-year invariant; promotion/transfer/repeat close-then-open, leaving only closes.
+
+### Conventions
+
+- **UUID v7** primary keys (`.$defaultFn(() => uuidv7())`); `created_at`/`updated_at` on every table.
+- **Indexes** on every FK, every `workspace_id`, and every unique-constraint column.
+- **Tenancy**: `workspace_id` is derived server-side from the Session `orgId`, never from the request body; it is a required parameter on every command, query, and repository method (ADR-0002 philosophy).
+- **Persistence**: Drizzle ORM + `postgres.js` in `packages/db` (ADR-0005); School domain lives in `apps/api/src/modules/school/{domain,application,infrastructure,routes}` (DDD + CQS-lite, modular monolith).
+
+### Deferred
+
+- Bulk "promote a whole Class Section" (single-student promotion ships first).
+- Postgres Row-Level Security (app-layer tenancy ships first).
+- Subjects, exams, attendance, fees, report cards, and the fuller student profile.

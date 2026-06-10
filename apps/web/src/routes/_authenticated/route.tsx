@@ -1,8 +1,10 @@
-import { createFileRoute, Outlet, Link, Navigate } from "@tanstack/react-router";
+import { createFileRoute, Outlet, Navigate } from "@tanstack/react-router";
 import { useAuth, useOrganizationList } from "@clerk/clerk-react";
-import { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useRef, useState } from "react";
+import { AppHeader } from "../../components/app-header";
 import { AppSidebar } from "../../components/app-sidebar";
+import { useAcademicYearStore } from "../../store/academic-year";
 
 export const Route = createFileRoute("/_authenticated")({
   component: AuthenticatedLayout,
@@ -12,6 +14,9 @@ function AuthenticatedLayout() {
   const { isLoaded, isSignedIn, orgId } = useAuth({ treatPendingAsSignedOut: false });
   const { isLoaded: orgsLoaded, userMemberships, setActive } = useOrganizationList({ userMemberships: true });
   const [mobileOpen, setMobileOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const setSelectedYear = useAcademicYearStore((s) => s.setSelectedYear);
+  const previousOrgId = useRef(orgId);
 
   const soleOrgId =
     orgsLoaded && !orgId && userMemberships.count === 1 ? userMemberships.data[0]?.organization.id : undefined;
@@ -21,6 +26,15 @@ function AuthenticatedLayout() {
       void setActive({ organization: soleOrgId });
     }
   }, [soleOrgId, setActive]);
+
+  // Reset cached data and the selected year when the active workspace changes.
+  useEffect(() => {
+    if (previousOrgId.current !== orgId) {
+      previousOrgId.current = orgId;
+      queryClient.clear();
+      setSelectedYear(null);
+    }
+  }, [orgId, queryClient, setSelectedYear]);
 
   // Close mobile sidebar on route change
   useEffect(() => {
@@ -85,22 +99,11 @@ function AuthenticatedLayout() {
 
       {/* Main area */}
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-        {/* Mobile top bar */}
-        <header className="lg:hidden flex items-center gap-3 h-14 px-4 border-b border-border bg-card shrink-0">
-          <button
-            onClick={() => {
-              setMobileOpen(true);
-            }}
-            className="p-1.5 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Open menu"
-          >
-            <Menu className="size-5" />
-          </button>
-          <Link to="/discover" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <img src="/whiteboard-logo.svg" alt="" className="w-7 h-7" />
-            <span className="font-bold text-sm text-foreground">WhiteBoard</span>
-          </Link>
-        </header>
+        <AppHeader
+          onOpenMenu={() => {
+            setMobileOpen(true);
+          }}
+        />
 
         {/* Page content */}
         <main className="flex-1 overflow-auto">

@@ -19,7 +19,7 @@ Default to using Bun instead of Node.js.
 - `Bun.serve()` supports WebSockets, HTTPS, and routes. Don't use `express`.
 - `bun:sqlite` for SQLite. Don't use `better-sqlite3`.
 - `Bun.redis` for Redis. Don't use `ioredis`.
-- `Bun.sql` for Postgres. Don't use `pg` or `postgres.js`.
+- `Bun.sql` for Postgres. Don't use `pg` or `postgres.js`. **Exception:** the Drizzle data layer in `packages/db` uses `postgres.js` (`drizzle-orm/postgres-js`) by deliberate decision — see ADR-0005.
 - `WebSocket` is built-in. Don't use `ws`.
 - Prefer `Bun.file` over `node:fs`'s readFile/writeFile
 - Bun.$`ls` instead of execa.
@@ -109,3 +109,26 @@ bun --hot ./index.ts
 ```
 
 For more information, read the Bun API docs in `node_modules/bun-types/docs/**.mdx`.
+
+## Project structure (this app)
+
+`apps/api` is a modular monolith. Each bounded context is a module under
+`src/modules/<context>/` with DDD + CQS-lite layers (see ADR-0006):
+
+- `domain/` — pure aggregates, value objects, domain events, repository
+  interfaces. No I/O, no Drizzle.
+- `application/` — command handlers and query functions.
+- `infrastructure/` — Drizzle repositories and read queries. The **only** layer
+  that imports `@repo/db`.
+- `routes.ts` — Fastify routes plus the module's composition root.
+
+Persistence and tenancy rules:
+
+- Go through `@repo/db` for all DB access. Never import `drizzle-orm` or
+  `postgres` directly — `@repo/db` re-exports the operators you need (`eq`,
+  `and`, `sql`, …). See ADR-0005.
+- Every command, query, and repository method takes a `workspaceId` derived from
+  the Clerk session `orgId` — never from the request body. Routes return 403
+  without an active workspace.
+
+The first module is `src/modules/school/` — see its `CONTEXT.md`.

@@ -2,11 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@repo/ui/theme-provider";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
 
 const router = createRouter({ routeTree });
+const queryClient = new QueryClient();
 
 declare module "@tanstack/react-router" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -66,7 +68,9 @@ if (!PUBLISHABLE_KEY) {
     <StrictMode>
       <ThemeProvider defaultTheme="system">
         <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-          <RouterProvider router={router} />
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+          </QueryClientProvider>
         </ClerkProvider>
       </ThemeProvider>
     </StrictMode>,
