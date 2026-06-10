@@ -19,13 +19,21 @@ function AcademicYearsPage() {
 
   return (
     <div className="mx-auto max-w-5xl p-6">
-      <PageHeader title="Academic Years" description="The school years your workspace operates in." action={addButton} />
+      <PageHeader
+        title="Academic Years"
+        description="The school years your workspace operates in."
+        action={addButton}
+      />
       {isPending ? (
         <Spinner />
       ) : error ? (
         <ErrorState message={errorMessage(error)} />
       ) : data.length === 0 ? (
-        <EmptyState title="No academic years yet" description="Create your first academic year to get started." action={addButton} />
+        <EmptyState
+          title="No academic years yet"
+          description="Create your first academic year to get started."
+          action={addButton}
+        />
       ) : (
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">

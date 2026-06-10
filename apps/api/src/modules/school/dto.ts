@@ -1,10 +1,4 @@
-import type {
-  AcademicYearDto,
-  ClassSectionDto,
-  GradeLevelDto,
-  StreamDto,
-  StudentDto,
-} from "@repo/contracts";
+import type { AcademicYearDto, ClassSectionDto, GradeLevelDto, StreamDto, StudentDto } from "@repo/contracts";
 import type { AcademicYear, ClassSection, GradeLevel, Stream, Student } from "@repo/db";
 
 // Row → DTO mappers. The wire boundary (ADR-0008): persistence columns like

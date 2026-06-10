@@ -482,12 +482,8 @@
           "name": "class_sections_academic_year_id_academic_years_id_fk",
           "tableFrom": "class_sections",
           "tableTo": "academic_years",
-          "columnsFrom": [
-            "academic_year_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["academic_year_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -495,12 +491,8 @@
           "name": "class_sections_grade_level_id_grade_levels_id_fk",
           "tableFrom": "class_sections",
           "tableTo": "grade_levels",
-          "columnsFrom": [
-            "grade_level_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["grade_level_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -508,12 +500,8 @@
           "name": "class_sections_stream_id_streams_id_fk",
           "tableFrom": "class_sections",
           "tableTo": "streams",
-          "columnsFrom": [
-            "stream_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["stream_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -523,13 +511,7 @@
         "class_sections_identity_uq": {
           "name": "class_sections_identity_uq",
           "nullsNotDistinct": true,
-          "columns": [
-            "workspace_id",
-            "academic_year_id",
-            "grade_level_id",
-            "stream_id",
-            "section_name"
-          ]
+          "columns": ["workspace_id", "academic_year_id", "grade_level_id", "stream_id", "section_name"]
         }
       },
       "policies": {},
@@ -837,12 +819,8 @@
           "name": "student_enrolments_student_id_students_id_fk",
           "tableFrom": "student_enrolments",
           "tableTo": "students",
-          "columnsFrom": [
-            "student_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["student_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -850,12 +828,8 @@
           "name": "student_enrolments_academic_year_id_academic_years_id_fk",
           "tableFrom": "student_enrolments",
           "tableTo": "academic_years",
-          "columnsFrom": [
-            "academic_year_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["academic_year_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -863,12 +837,8 @@
           "name": "student_enrolments_class_section_id_class_sections_id_fk",
           "tableFrom": "student_enrolments",
           "tableTo": "class_sections",
-          "columnsFrom": [
-            "class_section_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["class_section_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -884,54 +854,32 @@
     "public.academic_year_status": {
       "name": "academic_year_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "active",
-        "closed"
-      ]
+      "values": ["draft", "active", "closed"]
     },
     "public.grade_level_status": {
       "name": "grade_level_status",
       "schema": "public",
-      "values": [
-        "active",
-        "archived"
-      ]
+      "values": ["active", "archived"]
     },
     "public.stream_status": {
       "name": "stream_status",
       "schema": "public",
-      "values": [
-        "active",
-        "archived"
-      ]
+      "values": ["active", "archived"]
     },
     "public.class_section_status": {
       "name": "class_section_status",
       "schema": "public",
-      "values": [
-        "active",
-        "archived"
-      ]
+      "values": ["active", "archived"]
     },
     "public.student_status": {
       "name": "student_status",
       "schema": "public",
-      "values": [
-        "active",
-        "inactive"
-      ]
+      "values": ["active", "inactive"]
     },
     "public.enrolment_status": {
       "name": "enrolment_status",
       "schema": "public",
-      "values": [
-        "active",
-        "promoted",
-        "transferred",
-        "left",
-        "repeated"
-      ]
+      "values": ["active", "promoted", "transferred", "left", "repeated"]
     }
   },
   "schemas": {},

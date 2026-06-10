@@ -63,10 +63,7 @@ export async function getStudentById(workspaceId: string, id: string): Promise<S
 }
 
 /** The active roster for a class section. */
-export function getStudentsByClassSection(
-  workspaceId: string,
-  classSectionId: string,
-): Promise<RosterEntryDto[]> {
+export function getStudentsByClassSection(workspaceId: string, classSectionId: string): Promise<RosterEntryDto[]> {
   return db
     .select({
       studentId: students.id,

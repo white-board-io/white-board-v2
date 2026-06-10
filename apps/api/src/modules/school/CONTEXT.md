@@ -48,7 +48,7 @@ _Avoid_: "Admission" (that's the first-ever enrolment, a narrower idea),
 "Registration".
 
 **Promotion**:
-Advancing a Student to the next Academic Year by *closing* the current Enrolment
+Advancing a Student to the next Academic Year by _closing_ the current Enrolment
 (status `active → promoted`) and opening a new `active` Enrolment in the next
 year. The prior placement is never overwritten — only its status advances.
 
@@ -60,7 +60,7 @@ year. The prior placement is never overwritten — only its status advances.
   Enrolment's.
 - A **Student Enrolment** links one **Student** to one **Class Section** for one
   **Academic Year**.
-- A **Student** has exactly one *active* **Student Enrolment** at a time, and
+- A **Student** has exactly one _active_ **Student Enrolment** at a time, and
   many terminal ones across years (their history). Promotion, transfer, and
   repeat close the active one and open a new active one; leaving only closes.
 - **Promotion** produces a new **Student Enrolment** in the next **Academic
@@ -71,7 +71,7 @@ year. The prior placement is never overwritten — only its status advances.
 > **Dev:** "When the admin promotes a Student, do we update their Enrolment's
 > class to the new one?"
 > **Domain expert:** "No — the old Enrolment stays exactly as it was. Promotion
-> *creates a new Enrolment* in the next Academic Year. We need the history for
+> _creates a new Enrolment_ in the next Academic Year. We need the history for
 > transfer certificates and report cards."
 > **Dev:** "And a Student with no Enrolment?"
 > **Domain expert:** "Allowed — they exist but don't show up in any class list
@@ -82,6 +82,6 @@ year. The prior placement is never overwritten — only its status advances.
 - "Class" means **Grade Level** to a school but a **Class Section** in operations,
   and a `class` in code. Resolved: UI says "Class"; code says `GradeLevel` and
   `ClassSection`; never bare "Class" in code.
-- "Enrolment" vs "Admission": Admission is the *first* Enrolment into the school.
+- "Enrolment" vs "Admission": Admission is the _first_ Enrolment into the school.
   MVP treats both as Student Enrolment records and does not model Admission
   separately.

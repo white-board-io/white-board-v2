@@ -5,13 +5,7 @@ import { academicYears } from "./academic-years";
 import { classSections } from "./class-sections";
 import { students } from "./students";
 
-export const enrolmentStatus = pgEnum("enrolment_status", [
-  "active",
-  "promoted",
-  "transferred",
-  "left",
-  "repeated",
-]);
+export const enrolmentStatus = pgEnum("enrolment_status", ["active", "promoted", "transferred", "left", "repeated"]);
 
 export const studentEnrolments = pgTable(
   "student_enrolments",

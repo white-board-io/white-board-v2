@@ -18,10 +18,7 @@ export type CreateAcademicYearInput = {
   isCurrent?: boolean;
 };
 
-export async function createAcademicYear(
-  workspaceId: string,
-  input: CreateAcademicYearInput,
-): Promise<AcademicYear> {
+export async function createAcademicYear(workspaceId: string, input: CreateAcademicYearInput): Promise<AcademicYear> {
   try {
     const rows = await db
       .insert(academicYears)
@@ -56,10 +53,7 @@ export type CreateGradeLevelInput = {
   sortOrder?: number;
 };
 
-export async function createGradeLevel(
-  workspaceId: string,
-  input: CreateGradeLevelInput,
-): Promise<GradeLevel> {
+export async function createGradeLevel(workspaceId: string, input: CreateGradeLevelInput): Promise<GradeLevel> {
   try {
     const rows = await db
       .insert(gradeLevels)
@@ -104,11 +98,7 @@ export async function createStream(workspaceId: string, input: CreateStreamInput
 }
 
 export function listStreams(workspaceId: string): Promise<Stream[]> {
-  return db
-    .select()
-    .from(streams)
-    .where(eq(streams.workspaceId, workspaceId))
-    .orderBy(asc(streams.sortOrder));
+  return db.select().from(streams).where(eq(streams.workspaceId, workspaceId)).orderBy(asc(streams.sortOrder));
 }
 
 /* -------------------------------- Class Sections ------------------------------- */
@@ -122,10 +112,7 @@ export type CreateClassSectionInput = {
   capacity?: number | null;
 };
 
-export async function createClassSection(
-  workspaceId: string,
-  input: CreateClassSectionInput,
-): Promise<ClassSection> {
+export async function createClassSection(workspaceId: string, input: CreateClassSectionInput): Promise<ClassSection> {
   try {
     const rows = await db
       .insert(classSections)

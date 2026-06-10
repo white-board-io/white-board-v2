@@ -55,11 +55,7 @@ export class DrizzleEnrolmentRepository implements EnrolmentRepository {
     return row ? toAggregate(row) : null;
   }
 
-  async hasActiveInYear(
-    workspaceId: string,
-    studentId: string,
-    academicYearId: string,
-  ): Promise<boolean> {
+  async hasActiveInYear(workspaceId: string, studentId: string, academicYearId: string): Promise<boolean> {
     const [row] = await this.#db
       .select({ id: studentEnrolments.id })
       .from(studentEnrolments)
@@ -92,10 +88,7 @@ export class DrizzleEnrolmentRepository implements EnrolmentRepository {
           .update(studentEnrolments)
           .set({ status: closedState.status, exitedOn: closedState.exitedOn })
           .where(
-            and(
-              eq(studentEnrolments.id, closedState.id),
-              eq(studentEnrolments.workspaceId, closedState.workspaceId),
-            ),
+            and(eq(studentEnrolments.id, closedState.id), eq(studentEnrolments.workspaceId, closedState.workspaceId)),
           );
         await tx.insert(studentEnrolments).values(toRow(openedState));
       });

@@ -161,9 +161,7 @@ export async function schoolRoutes(fastify: FastifyInstance): Promise<void> {
     withWorkspace(request, reply, async (workspaceId) => {
       const body = parseBody(promoteStudentSchema, request.body, reply);
       if (!body) return;
-      reply
-        .status(201)
-        .send(await promoteStudent.execute(workspaceId, { studentId: idParam(request), ...body }));
+      reply.status(201).send(await promoteStudent.execute(workspaceId, { studentId: idParam(request), ...body }));
     }),
   );
 

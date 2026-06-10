@@ -23,8 +23,7 @@ function SectionRosterPage() {
 
   const section = sections.data?.find((s) => s.id === sectionId);
   const gradeName = section ? (grades.data?.find((g) => g.id === section.gradeLevelId)?.name ?? "") : "";
-  const streamName =
-    section?.streamId ? (streams.data?.find((s) => s.id === section.streamId)?.name ?? null) : null;
+  const streamName = section?.streamId ? (streams.data?.find((s) => s.id === section.streamId)?.name ?? null) : null;
   const label = section
     ? `${gradeName} - ${section.sectionName}${streamName ? ` (${streamName})` : ""}`
     : "Section roster";
@@ -45,7 +44,10 @@ function SectionRosterPage() {
       ) : roster.error ? (
         <ErrorState message={errorMessage(roster.error)} />
       ) : roster.data.length === 0 ? (
-        <EmptyState title="No students enrolled" description="Enrol students into this section from a student's page." />
+        <EmptyState
+          title="No students enrolled"
+          description="Enrol students into this section from a student's page."
+        />
       ) : (
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">

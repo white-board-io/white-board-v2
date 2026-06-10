@@ -41,7 +41,7 @@ is no shared learner identity across them.
 - **Modular monolith**: `packages/db` owns all Drizzle schema and the single
   migration history (organized per context, e.g. `schema/school/*`). Each vertical
   lives as a module under `apps/api/src/modules/<context>/{domain,application,
-  infrastructure,routes}` — `domain` is pure TypeScript, only `infrastructure`
+infrastructure,routes}` — `domain` is pure TypeScript, only `infrastructure`
   imports `@repo/db`.
 - **Shared contracts**: `packages/contracts` holds pure-zod request/response
   schemas shared by `apps/api` and `apps/web` (ADR-0008). The web (React 19 +

@@ -17,7 +17,7 @@ vertical operates strictly inside one Workspace. See `CONTEXT-MAP.md`.
   so a unified model would be a tangle of type-conditional logic.
 - **Shared Platform-level Learner** — one person identity reused across
   verticals. Rejected: a Workspace is exactly one institution of one type, so
-  cross-vertical identity only matters *across* Workspaces, for which there is no
+  cross-vertical identity only matters _across_ Workspaces, for which there is no
   current driver.
 
 ## Consequences

@@ -7,7 +7,7 @@ Postgres database. Each bounded context lives as a module under
 `domain` is pure TypeScript, only `infrastructure` imports `@repo/db` (Drizzle).
 We chose this middle path because the domain is largely CRUD with one real
 invariant cluster (Student Enrolment / Promotion), so full DDD aggregates are
-warranted *there* but not everywhere.
+warranted _there_ but not everywhere.
 
 ## Considered options
 

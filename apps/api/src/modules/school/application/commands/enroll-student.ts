@@ -17,11 +17,7 @@ export class EnrollStudent {
   readonly #students: StudentRepository;
   readonly #classSections: ClassSectionLookup;
 
-  constructor(
-    enrolments: EnrolmentRepository,
-    students: StudentRepository,
-    classSections: ClassSectionLookup,
-  ) {
+  constructor(enrolments: EnrolmentRepository, students: StudentRepository, classSections: ClassSectionLookup) {
     this.#enrolments = enrolments;
     this.#students = students;
     this.#classSections = classSections;
@@ -39,11 +35,7 @@ export class EnrollStudent {
     if (!studentExists) throw new NotFoundError("Student not found.");
 
     // Friendly pre-check; the DB partial unique index is the atomic backstop.
-    const alreadyActive = await this.#enrolments.hasActiveInYear(
-      workspaceId,
-      input.studentId,
-      section.academicYearId,
-    );
+    const alreadyActive = await this.#enrolments.hasActiveInYear(workspaceId, input.studentId, section.academicYearId);
     if (alreadyActive) {
       throw new ConflictError("Student already has an active enrolment for this academic year.");
     }

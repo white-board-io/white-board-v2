@@ -31,11 +31,11 @@ bun install
 
 Create the env files (copy each `.env.example` and fill in):
 
-| File | Keys |
-| --- | --- |
-| `apps/web/.env` | `VITE_CLERK_PUBLISHABLE_KEY` |
-| `apps/api/.env` | `CLERK_SECRET_KEY`, `DATABASE_URL` |
-| `packages/db/.env` | `DATABASE_URL` |
+| File               | Keys                               |
+| ------------------ | ---------------------------------- |
+| `apps/web/.env`    | `VITE_CLERK_PUBLISHABLE_KEY`       |
+| `apps/api/.env`    | `CLERK_SECRET_KEY`, `DATABASE_URL` |
+| `packages/db/.env` | `DATABASE_URL`                     |
 
 Start Postgres and apply migrations:
 
